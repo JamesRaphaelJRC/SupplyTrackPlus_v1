@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>SupplyTrackPlus</title>
+     <!-- Link to CSS file using url_for -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles/commons.css')}}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles/vendors.css')}}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard.css')}}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles/reviews.css')}}">
+   
+     <!-- Links to jquery library and javascript file-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/new.js' )}}"></script>
+</head>
+<body>
+    <header>
+        <button id="drawer-btn"></button>
+        <div id="logo"></div>
+        <div class="head-nav-container">
+            <a href="{{ url_for('dashboard')}}"><div class="nav" id="nav-dashboard">
+              Dashboard<br>
+              {% if page == 'Dashboard' %}
+                <div id="indicator"></div>
+              {% endif %}
+            </div></a>
+            <a href="{{ url_for('vendors')}}"><div class="nav" id="nav-vendors">
+              Vendors<br>
+              {% if page == 'Vendors' %}
+                <div id="indicator"></div>
+              {% endif %}
+            </div></a>
+            <a href="{{ url_for('orders', filter_by='latest')}}"><div class="nav" id="nav-orders">
+              Orders<br>
+              {% if page == 'Orders' %}
+                <div id="indicator"></div>
+              {% endif %}
+            </div></a>
+            <a href="{{ url_for('reviews')}}"><div class="nav" id="nav-review">
+              Reviews<br>
+              {% if page == 'Reviews' %}
+                <div id="indicator"></div>
+              {% endif %}
+            </div></a>
+        </div>
+        <div id="user-info">
+            <div id="avatar"></div>
+            {% if user %}
+            <div id="username">@{{ user.first_name }} {{ user.last_name }}</div>
+            {% endif %}
+        </div>
+    </header>
+
+        <!-- The sidepanel structure -->
+    <section class="drawer">
+        <div class="views-container">
+          <a href="{{ url_for('dashboard') }}">
+            <div class="view-box">
+                <div class="icon-box" id="dashboard"></div>
+                <div class="name-box" id="dashboard"><h5>Dashboard</h5></div>
+                {% if page == 'Dashboard' %}
+                  <div class="page-indicator"></div>
+                {% endif %}
+            </div>
+          </a>
+          <a href="{{ url_for('vendors') }}">
+            <div class="view-box" id="vendors">
+              <div class="icon-box" id="vendors"></div>
+              <div class="name-box" id="vendors"><h5>Vendors</h5></div>
+              {% if page == 'Vendors' %}
+                <div class="page-indicator" ></div>
+              {% endif %}
+            </div>
+          </a>
+          <a href="{{ url_for('orders', filter_by='latest') }}">
+            <div class="view-box" id="orders">
+              <div class="icon-box" id="orders"></div>
+              <div class="name-box" id="orders"><h5>Orders</h5></div>
+              {% if page == 'Orders' %}
+                <div class="page-indicator" ></div>
+              {% endif %}
+            </div>
+          </a>
+          <a href="{{ url_for('reviews') }}">
+            <div class="view-box" id="reviews">
+              <div class="icon-box" id="reviews"></div>
+              <div class="name-box" id="reviews"><h5>Reviews</h5></div>
+              {% if page == 'Reviews' %}
+                <div class="page-indicator" ></div>
+              {% endif %}
+            </div>
+          </a>
+          <a href="{{ url_for('logout') }}">
+            <div class="view-box" id="logout">
+              <div class="icon-box" id="logout"></div>
+              <div class="name-box" id="logout"><h5>Logout</h5></div>
+            </div>
+          </a>
+        </div>
+    </section>
+    <div class="secondHead">
+        <div class="page-info">
+          {% if page %}
+            <div id="page-name">{{ page }}</div>
+          {% endif %}
+          {% if page == 'Vendors' %}
+            <a  class="new-obj" title="Create new vendor" href="{{ url_for('create_vendor')}}"><button class="new-obj">NEW</button></a>
+          {% endif %}
+          {% if page == 'Orders' %}
+          <a  class="new-obj" title="Create new order" href="{{ url_for('create_order')}}"><button class="new-obj">NEW</button></a>
+        {% endif %}
+        {% if page == 'Reviews' %}
+        <a  class="new-obj" title="Review an order" href="{{ url_for('create_review')}}"><button class="new-obj">NEW</button></a>
+      {% endif %}
+        </div>
+        {% if page == 'Vendors' %}
+        <label for="change-view-btn" class="filters bold" id="chng-view"> Change view</label>
+        <button id="change-view-btn" title="Click to change display"></button>
+        {% endif %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <form id="search-input" action="{{ url_for('search') }}" method="POST">
+          {{ searchform.hidden_tag() }}
+          <div class="search-bar">
+              <input id="search-box" name="searched" placeholder="Search..."><span><button id="search-btn" type="submit"></button></span>
+              <div class="options">
+                  <input type="radio" name="option" value="Vendor" id="vendor-opt" name="search-opt">
+                  <input type="hidden" name="current_pg" value="{{ request.url }}">
+                  <label for="vendor-opt">Vendor</label>
+                  <input type="radio" name="option" value="Order" id="order-opt" name="search-opt">
+                  <label for="order-opt">Order</label>
+              </div>
+          </div>
+        </form>
+    </div>
+    <div class="three-d-line"></div>
+    {% block main %}{% endblock %}
+</body>
+<footer>&copy <em>James Raphael Corhort 12</em></footer>
+</html>

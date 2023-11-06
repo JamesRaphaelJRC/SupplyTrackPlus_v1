@@ -1,0 +1,537 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    height: 95vh;
+    /* position: absolute; */
+}
+
+header {
+    height: 50px; 
+    /* border-bottom: 1px solid #CCCCCC; */
+    /* border: 1px solid rgb(212, 48, 48); */
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    background: #141414d3;; /* rgb(168, 166, 166) */
+}
+
+footer {
+    height: 5vh;
+    background-color: #213159;
+    color: #f04b4c;
+    text-align: center;
+    font-size: 10;
+    font-weight: 500;
+}
+a {
+    text-decoration: none;
+}
+
+#drawer-btn {
+    /* border: 1px solid black; */
+    width: 30px;
+    height: 30px;
+    position: relative;
+    background-image: url('../images/darhboard.png');
+    background-repeat: no-repeat;
+}
+
+#logo {
+    /* border: 1px solid yellow; */
+    height: 100%;
+    width: 20%;
+    margin-left: -10px;
+    background: url(../images/Black-logo-nobackground.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.head-nav-container {
+    /* border: 1px solid black; */
+    height: 100%;
+    width: 50%;
+    gap: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav {
+    /* border: 1px solid rebeccapurple; */
+    height: 65%;
+    width: 75px;
+    margin-top: 15px;
+    padding: 0;
+    font-size: 15px;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+}
+
+#user-info {
+    /* border: 1px solid red; */
+    height: 100%;
+    /* margin-top: 15px; */
+    width: 30%;
+    float: right;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#avatar {
+    /* border: 1px solid green; */
+    margin-left: 30px ;
+    height: 100%;
+    width: 60px;
+    border-radius: 50%;
+}
+
+#username {
+    /* border: 1px solid darkblue; */
+    margin-top: 10px;
+    height: 70%;
+    width: 60%;
+    text-align: end;
+    color: white;
+    font-weight: 500;
+}
+.drawer {
+    /* border: 1px solid blue; */
+    position: fixed;
+    height: 93%;
+    width: 10%;
+    left: -500px;
+    background-color: #141414d3;
+    transition: 0.3s;
+
+}
+
+.drawer.open {
+    left: 0;
+}
+
+.secondHead {
+    /* border: 1px solid black; */
+    height: 60px;
+    width: 100vw;
+    background-color: rgb(168, 166, 166);
+    /* display: flex; */
+    /* flex-direction: row; */
+}
+
+
+.page-info {
+    /* border: 1px solid salmon; */
+    height: 100%;
+    width: 17%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-name {
+    /* border: 1px solid aqua; */
+    height: 50%;
+    width: 200px;
+    font-size: 18px;
+    font-weight: 600;
+    color: gray;
+}
+
+.new-obj {
+    /* border: 1px solid rebeccapurple; */
+    height: 50%;
+    width: 50px;
+    font-weight: 600;
+    background-color: #2E9CCA;
+    border: 0;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+
+.messages {
+    /* border: 1px solid black; */
+    height: 50px;
+    width: 400px;
+    float: left;
+    margin-left: 20px;
+    text-wrap:wrap ;
+    margin-top: 5px;
+    text-align: center;
+    color: red;
+    overflow: scroll;
+}
+
+.search-bar {
+    /* border:1px solid blue; */
+    margin-top: 15px;
+    height: 100%;
+    width: 40%;
+    float: right;
+}
+
+#search-btn {
+    /* border: 1px solid red; */
+    /* margin-top: px; */
+    margin-left: -20px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    position: absolute;
+    background-image: url('../images/icons8-search-25.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: inherit;
+    border: 0;
+}
+
+
+#search-box {
+    border-bottom: 1px solid gray;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    outline: none;
+    width: 90%;
+    height: 50%;
+    background-color: rgb(168, 166, 166);
+
+}
+
+.options {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+
+.three-d-line {
+    width: 100%; /* Set the width of the line */
+    height: 2px; /* Set the height (thickness) of the line */
+    background-color: #ccc; /* Set the background color of the line */
+    position: relative;
+}
+
+/* Create the 3D appearance using box-shadow */
+.three-d-line::before,
+.three-d-line::after {
+    content: "";
+    position: absolute;
+    height: 2px; /* Match the height (thickness) of the line */
+    width: 100%; /* Set the width of the 3D border */
+    background-color: #ffffff6e; /* Set the color of the 3D border */
+}
+
+/* Position the 3D border above and below the line */
+.three-d-line::before {
+    top: -2px; /* Move the border 2px above the line */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Apply shadow above the line */
+}
+
+.three-d-line::after {
+    bottom: -2px; /* Move the border 2px below the line */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3); /* Apply shadow below the line */
+}
+
+/*
+    ====================
+    Side panel styling
+    ====================
+*/
+.views-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 65px;
+    /* border: 1px solid black; */
+}
+
+.view-box {
+    /* border: 1px solid white; */
+    width: 100%;
+    height: 35px;
+    align-items: center;
+    display: flex;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.view-box:hover {
+    background-color: #2E9CCA;
+}
+
+/* Customized box for settings */
+.view-box#logout {
+    margin-top: 310px;
+    margin-bottom: 0px;
+    /* border: 1px solid white; */
+}
+
+.view-box#logout:hover {
+    background-color: inherit;
+}
+
+.name-box {
+    /* border: 1px solid red; */
+    flex: 1 1 0;
+    height: 35px;
+    color: white;
+    margin: 0px 10px 20px 0px;
+}
+
+.page-indicator {
+    width: 1.94px;
+    align-self:stretch;
+    background: white;
+    border-radius: 1.94px;
+    margin-right: 5px;
+}
+
+/* Page indicator for the navigation bar */
+#indicator {
+    height: 2px;
+    width: auto;
+    background-color: white;
+}
+
+/*
+    ===============
+    Table styling
+    ===============
+*/
+.table-container {
+    border-right: 1px solid #213159;
+    top: 145px;
+    left: 20.5%;
+    height: 100%;
+    width: 70%;
+    max-width: 70%;
+    min-width: 70%;
+    box-sizing: border-box;
+    overflow: scroll;
+}
+
+.table-container#orders-table {
+    width: 100%;
+    height: 100%;
+}
+
+.space {
+    height: 80%;
+    width: 100%;
+}
+
+table {
+    /* border: 1px solid black; */
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 100%;
+    min-width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+/* Styling for the table head data(th) and table row data(td) */
+th, td {
+    border-top: 1px solid gray;
+    border-bottom: 0.5px solid gray;
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* Additional Style for the data in the table head */
+#head th {
+    font-weight: 500;
+}
+
+/* Styling for the first child of the table data and table head */
+td:first-child, th:first-child {
+    width: 20px;
+}
+
+/* Styling for other children */
+td:not(:first-child), th:not(:first-child) {
+    width: auto;
+}
+
+/* Table row styling */
+tr#table-body:hover {
+    background-color: rgb(168, 166, 166, 0.3);
+}
+
+/* Buttons styling for rows in the table */
+.action-btn {
+    display: none;
+}
+
+.main-btn:focus + .action-btn,
+.action-btn:hover {
+    display: flex;
+    gap: 10px;
+}
+
+/*
+    ================
+    Button styling
+    ================
+*/
+.delete-btn {
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/delete.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.edit-btn {
+    margin-bottom: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/Edit_fill.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.delivered-btn {
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/delivered-16.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.review-btn {
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/review-16.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+
+/*
+    ==================
+    Styling for forms
+    ==================
+*/
+.form-container {
+    /* border: 1px solid black; */
+    top: 25%;
+    margin-left: 10px;
+    left: 20.5%;
+    height: 82%;
+    width: 79%;
+}
+
+.input-box {
+    margin-bottom: 15px;
+    font-weight: 400;
+    margin-left: 10px;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: gray;
+    font-size: 12px;
+}
+
+#name-input {
+    width: 350px;
+    height: 25px;
+}
+
+input[type="text"], input[type="number"] {
+    width: 350px;
+    height: 25px;
+    left: 5px;
+    top: 200px;
+    border: 1px rgb(128, 128, 128, 0.3) solid;
+}
+
+input[type="submit"] {
+    margin-left: 120px;
+    width: 125px;
+    height: 35px;
+    left: 115px;
+    background: rgb(194, 188, 188);
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 14px;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: gray;
+}
+
+.body-font#cancel {
+    /* border: 1px solid black; */
+    height: 35px;
+    width: 125px;
+    margin-left: 9px;
+    position: absolute;
+    background: rgb(194, 188, 188);
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+}
+
+#cancel:hover {
+    background-color: gray;
+}
+
+#current-page {
+    height: 15px;
+    background-color: gray;
+    padding: 2px;
+}
+
+/* Styling for display page when user has no vendor/review/order */
+.empty {
+    /* border: 1px solid brown; */
+    margin-top: 15%;
+    align-content: center;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    text-align: center;
+    color: rgb(0, 0, 0, 0.2);
+}
+
+
+
+
+
+/* Filters button */
+.filters {
+    float: right;
+    margin-bottom: 10px;
+    font-size: 12px;
+    margin-right: 10px;
+    gap: 10px;
+}
+
+.filters#chng-view {
+    float: left;
+    margin-top: 35px;
+}
+
+#filter-icon {
+    border: 1px solid black;
+    height: 100%;
+    width: 10px;
+}
+
+.bold {
+    font-weight: 500;
+}

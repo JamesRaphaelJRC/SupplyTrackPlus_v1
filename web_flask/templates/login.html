@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-SupplyTrackPlus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/accounts.css') }}">
+</head>
+<body id="accounts">
+    <div class="background-frame">
+        <div class="left-box">
+            <div class="logo" id="accounts"></div>
+            <div class="write-up">...Stay in touch with your suppliers</div>
+        </div>
+        <div class="messages">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </div>
+        <div class="login-container">
+            <p class="text">Wel<span id="come">come</span></p>
+            <div class="form-container">
+                <form action="" method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="input-box">
+                        {{ form.username.label }}<br>
+                        {{ form.username(size=32) }}
+                        {% for error in form.username.errors %}
+                        <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
+                        {% endfor %}
+                    </div>
+                    <div class="input-box">
+                        {{ form.password.label }}<br>
+                        {{ form.password(size=32) }}
+                        {% for error in form.password.errors %}
+                        <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        {{ form.submit()}}
+                    </div>
+                </form>
+            </div>
+            <div class="line-box">
+            <img class="line" src="https://via.placeholder.com/225x1" />
+            <p id="or">OR</p>
+            </div>
+            <p id="register" style="width: 209px; height: 9.40px; left: 76.50px; top: 380px; position: absolute"><span style="color: black; font-size: 14px; font-family: Cabinet Grotesk; font-weight: 500; word-wrap: break-word">Don’t have account? </span><a href="{{ url_for('signUp') }}" style="color: black; font-size: 14px; font-family: Cabinet Grotesk; font-weight: 700; word-wrap: break-word">Register Now</a></p>
+           
+    </div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% block main %}
+
+
+<!-- Vendors table and card-view structure -->
+{% if vendors %}
+
+<!-- Checks if vendors is empty i.e if user has no orders -->
+{% if vendors.total == 0 %}
+<div class="table-container">
+  <div class="empty">
+    Oops! You have no vendors at the momment,<br>kindly create one using the<br>NEW button above
+  </div>
+</div> 
+{% else %}
+<section class="card-display-section">
+  <div class="card-display-container">
+    {% for vendor in vendors.items %}
+    <div class="card-box">
+      <div id="pic-box"></div>
+      <div class="details-frame">
+        <div id="data"><strong>Name: </strong>{{ vendor.name }}</div>
+        <div id="data"><strong>Email: </strong>{{ vendor.email }}</div>
+        <div id="data"><strong>Mobile: </strong>{{ vendor.phone_number }}</div>
+        <div id="data"><strong>Address: </strong>{{ vendor.address }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<!-- Add next page things here (pagination)-->
+{% for page_num in vendors.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+  <a class="body-font" href="{{ url_for('vendors', page=page_num) }}">{{ page_num }}</a>
+  {% if vendors.page == page_num %}
+  <a class="body-font" id="current-page" href="{{ url_for('vendors', page=page_num) }}">{{ page_num }}</a>
+  {% endif %}
+{% else %}
+  ...
+{% endif %}
+{% endfor %}
+<section class="table-view">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr id="head">
+            <th>S/N</th>
+            <th>Names</th>
+            <th>Email</th>
+            <th>Mobile number</th>
+            <th>Orders<span style="font-size: 11px;"><br>(open/total)</span></th>
+            <th>Last order</th>
+            <th>Action</th>
+          </tr>
+      </thead>
+      {% for vendor in vendors.items %}
+      <tbody>
+        <tr id="table-body">
+          <td id="td-vendor-id" style="display: none;">{{ vendor.id }}</td>
+          <td>{{ loop.index }}</td>
+          <td>{{ vendor.name }}</td>
+          <td>{{ vendor.email }}</td>
+          <td>{{ vendor.phone_number }}</td>
+          <td>{{ vendor.open_orders }} / {{ vendor.orders|length }} </td>
+          <td>{{ vendor.last_order }}</td>
+          <td>
+            <button class="main-btn">action</button>
+            <div class="action-btn">
+              <form action="{{ url_for('edit_vendor', id=vendor.id) }}" method="POST"> 
+                <button class="edit-btn" type="submit"></button>
+              </form>
+              <form action="{{ url_for('delete_vendor', id=vendor.id) }}" method="POST">
+                <button class="delete-btn" type="submit" onclick="return confirm('Are you sure you want to delete this vendor?')"></button>
+              </form>
+            </div>
+          </td>
+        </tr> 
+      </tbody>
+      {% endfor %}
+    </table>
+
+  </div>
+  <div class="selected-view-container">
+    <div class="default-show" id="default"><br><br><br><br>Tap on any Item<br>for more details</div>
+
+    <!-- Preview box for vendor details -->
+    <div class="preview-box"></div>
+  </div>
+</section>
+{% endif %}
+{% endif %}
+
+
+
+<!-- New vendor form -->
+{% if form %}
+  <section class="display-container">
+  <div class="table-container">
+    <div class="selected-view-container">
+      <div class="form-container">
+        <form action="" method="POST" novalidate>
+          {{ form.hidden_tag() }}
+          <div class="input-box">
+            {{ form.name.label }}<br>
+            {{ form.name(size=120, id="name-input") }}<br>
+            {% for error in form.name.errors %}
+              [{{ error }}]
+            {% endfor %}
+          </div>
+          <div class="input-box">
+            {{ form.email.label }}<br>
+            {{ form.email(size=120) }}<br>
+            {% for error in form.email.errors %}
+              [{{ error }}]
+            {% endfor %}
+          </div>
+          <div class="input-box">
+            {{ form.phone_number.label }}<br>
+            {{ form.phone_number(size=20) }}<br>
+            {% for error in form.phone_number.errors %}
+              [{{ error }}]
+            {% endfor %}
+          </div>
+          <div class="input-box">
+            {{ form.address.label }}<br>
+            {{ form.address(size=120) }}<br>
+            {% for error in form.address.errors %}
+              [{{ error }}]
+            {% endfor %}
+          </div>
+
+          <div>
+              {{ form.submit()}}
+          </div>
+        </form>
+        <a href="{{ url_for('vendors') }}">
+          <button class="body-font" id="cancel">Cancel</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  </section>
+{% endif %}
+
+
+
+<!-- Search page structure for vendors -->
+{% if search_results %}
+
+  {% if search_results.total == 0 %}
+  <div class="table-container">
+  <div class="empty">
+    Oops! no vendor found<br>Please re-check name and try again.
+  </div>
+  </div> 
+  {% else %}
+  <section class="card-display-section">
+  <div class="card-display-container">
+    {% for vendor in search_results.items %}
+    <div class="card-box">
+      <div id="pic-box"></div>
+      <div class="details-frame">
+        <div id="data"><strong>Name: </strong>{{ vendor.name }}</div>
+        <div id="data"><strong>Email: </strong>{{ vendor.email }}</div>
+        <div id="data"><strong>Mobile: </strong>{{ vendor.phone_number }}</div>
+        <div id="data"><strong>Address: </strong>{{ vendor.address }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  </section>
+  <!-- Pagination -->
+  {% for page_num in search_results.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+  <a class="body-font" href="{{ url_for('search', page=page_num) }}">{{ page_num }}</a>
+  {% if search_results.page == page_num %}
+  <a class="body-font" id="current-page" href="{{ url_for('search', page=page_num) }}">{{ page_num }}</a>
+  {% endif %}
+  {% else %}
+  ...
+  {% endif %}
+  {% endfor %}
+  <section class="table-view">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr id="head">
+            <th>S/N</th>
+            <th>Names</th>
+            <th>Email</th>
+            <th>Mobile number</th>
+            <th>Orders<span style="font-size: 11px;"><br>(open/total)</span></th>
+            <th>Last order</th>
+            <th>Action</th>
+          </tr>
+      </thead>
+      {% for vendor in search_results.items %}
+      <tbody>
+        <tr id="table-body">
+          <td id="td-vendor-id" style="display: none;">{{ vendor.id }}</td>
+          <td>{{ loop.index }}</td>
+          <td>{{ vendor.name }}</td>
+          <td>{{ vendor.email }}</td>
+          <td>{{ vendor.phone_number }}</td>
+          <td>{{ vendor.open_orders }} / {{ vendor.orders|length }} </td>
+          <td>{{ vendor.last_order }}</td>
+          <td>
+            <button class="main-btn">action</button>
+            <div class="action-btn">
+              <form action="{{ url_for('edit_vendor', id=vendor.id) }}" method="POST"> 
+                <button class="edit-btn" type="submit"></button>
+              </form>
+              <form action="{{ url_for('delete_vendor', id=vendor.id) }}" method="POST">
+                <button class="delete-btn" type="submit" onclick="return confirm('Are you sure you want to delete this vendor?')"></button>
+              </form>
+            </div>
+          </td>
+        </tr> 
+      </tbody>
+      {% endfor %}
+    </table>
+
+  </div>
+  <div class="selected-view-container">
+    <div class="default-show" id="default"><br><br><br><br>Tap on any Item<br>for more details</div>
+
+    <!-- Preview box for vendor details -->
+    <div class="preview-box"></div>
+  </div>
+  </section>
+  {% endif %}
+{% endif %}
+{% endblock %}

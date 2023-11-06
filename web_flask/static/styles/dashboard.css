@@ -1,0 +1,114 @@
+/*
+    =======================
+    Widgets section styles
+    =======================
+*/
+.display-container {
+    /* border: 1px solid black; */
+    height: 82%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.stat-container {
+    /* border: 1px solid blue; */
+    height: 100%;
+    width: 35%;
+    border-right: 2px solid gray;
+    background-color: rgb(41, 99, 137);
+}
+
+.widgets {
+    /* border: 1px solid brown; */
+    width: 65%;
+    left: 25%;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+    gap: 19.44px;
+    display: inline-flex;
+    height: 100%;
+    /* background-color: #213159; */
+
+}
+
+.widget-box {
+    /* border: 1px solid brown; */
+    flex: 1 1 0;
+    /* width: 200px; */
+    background-color: #e7e7e7;
+    /* background: rgb(46, 156, 204, 0.3); */
+    max-width: 100%;
+    min-width: 10%;
+    padding: 20px;
+    /* box-shadow: 0px 1.9444444179534912px 10px rgba(128, 128, 128, 0.3); */
+    border-radius: 23.33px;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    align-items: center;
+    gap: 7px;
+    display: inline-flex;
+    margin-top: 7%;
+}
+
+/* Style for the inner widget box housing the icon box, description and value */
+.innerbox {
+    /* border: 1px solid yellow; */
+    height: 85.89px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15.56px;
+    display: flex;
+}
+
+.icon-and-name {
+    /* border: 1px solid blue; */
+    align-items: center;
+    gap: 7.78px;
+    display: inline-flex;
+}
+
+.icon {
+    /* border: 1px solid black; */
+    height: 25px;
+    width: 25px;
+    padding: 3.89px;
+    border-radius: 7.78px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 9.72px;
+    display: flex;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.name {
+    color: #808191;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 800;
+    line-height: 19.44px;
+    word-wrap: break-word;
+}
+
+.icon#vendor-icon {
+    background-image: url('../images/vendor_widget.png');
+}
+
+.icon#orders-icon {
+    background-image: url('../images/order_widget.png');
+}
+
+.icon#reviews-icon {
+    background-image: url('../images/review_widget.png');
+}
+
+.value {
+    /* border: 1px solid black; */
+    color: #1B1D21;
+    font-size: 31.11px;
+    font-family: Poppins;
+    font-weight: 500;
+    word-wrap: break-word;
+}

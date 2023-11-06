@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% block main %}
+
+
+<!-- orders table -->
+{% if orders %}
+<!-- Checks if paginated orders is empty i.e if user has no orders -->
+{% if orders.total == 0 %}
+  <div class="table-container">
+    <div class="empty">
+      Sorry, You have no orders at the momment.
+    </div>
+  </div> 
+{% else %}
+<form action="{{ url_for('filter_orders', filter_by='') }}" method="POST">
+  <label for="filters"  class="filters bold">Filter by</label>
+  <select class="filters" name="filter_by" onchange="this.form.submit()">
+    <option id="empty" value="null">Options</option>
+    <option id="latest" value="latest">Latest</option>
+    <option id="oldest" value="oldest">Oldest</option>
+    <option id="by_open" value="open">Open Orders</option>
+    <option id="by_closed" value="closed">Closed Orders</option>
+  </select>
+</form>
+<section class="table-view" id="orders-table">
+  <div class="space">
+    <table>
+      <thead>
+        <tr id="head">
+            <th>S/N</th>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Vendor</th>
+            <th>Quantity</th>
+            <th>Unit Cost</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+      </thead>
+      {% for order in orders.items %}
+      <tbody>
+        <tr id="table-body">
+          <td>{{ loop.index }}</td>
+          <td>{{ order.product_name }}</td>
+          <td>{{ order.description }}</td>
+          <td>{{ order.vendor_name }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.unit_cost }}/{{ order.unit }}</td>
+          <td>{{ order.created_at.strftime('%d-%b-%Y') }} {{ order.created_at.strftime('%H:%M') }}</td>
+          {% if order.delivery_status == True %}
+            <td>Delivered</td>
+          {% else %}
+            <td>Not delivered</td>
+          {% endif %}
+          <td>
+            {% if order.delivery_status == False %}
+              <button class="main-btn">action</button>
+              <div class="action-btn">
+                  <form action="{{ url_for('edit_order', id=order.id) }}" method="POST"> 
+                    <button class="edit-btn" title="Edit this order" type="submit"></button>
+                  </form>
+                  <form action="{{ url_for('orders', id=order.id, filter_by='') }}" method="POST"> 
+                    <button class="delivered-btn" title="Mark as delivered" type="submit" onclick="return confirm('Do you confirm that to have received this order?')"></button>
+                  </form>
+                <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                  <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
+                </form>
+              </div>
+
+            {% else %}
+              <!-- Check if order already has a review -->
+              {% if order.reviews|length == 0 %}
+                <button class="main-btn">Review</button>
+                <div class="action-btn">
+                    <form action="{{ url_for('create_review', order_id=order.id, vendor_id=order.vendor_id) }}" method="POST"> 
+                      <button class="review-btn" title="Review this order" type="submit"></button>
+                    </form>
+                    <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                      <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
+                    </form>
+                </div>
+              {% else %}
+                <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                  <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
+                </form>
+              {% endif %}
+            {% endif %}
+          </td>
+        </tr> 
+      </tbody>
+      {% endfor %}
+    </table>
+    {% for page_num in orders.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+    {% if filter_by %}
+      <a class="body-font" href="{{ url_for('filter_orders', page=page_num, filter_by=filter_by) }}">{{ page_num }}</a>
+    {% else %}
+    <a class="body-font" href="{{ url_for('orders', page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+      {% if orders.page == page_num %}
+      <a class="body-font" id="current-page" href="{{ url_for('orders', page=page_num)}}">{{ page_num }}</a>
+      {% endif %}
+    {% else %}
+      ...
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endif %}
+
+
+
+<!-- New order form -->
+{% if form %}
+<div class="form-container">
+  <form action="" method="POST" novalidate>
+      {{ form.hidden_tag() }}
+      <div class="input-box">
+        {{ form.vendor_id.label }}<br>
+        {{ form.vendor_id }}<br>
+        {% for error in form.vendor_id.errors %}
+          [{{ error }}]
+        {% endfor %}
+      </div>
+      <div class="input-box">
+        {{ form.product_name.label }}<br>
+        {{ form.product_name(size=60) }}<br>
+        {% for error in form.product_name.errors %}
+          [{{ error }}]
+        {% endfor %}
+      </div>
+      <div class="input-box">
+        {{ form.description.label }}<br>
+        {{ form.description(size=255) }}<br>
+        {% for error in form.description.errors %}
+          [{{ error }}]
+        {% endfor %}
+      </div>
+      <div class="input-box">
+        {{ form.quantity.label }}<br>
+        {{ form.quantity(size=120) }}<br>
+        {% for error in form.quantity.errors %}
+          [{{ error }}]
+        {% endfor %}
+      </div>
+      <div class="input-box">
+        {{ form.unit.label }}<br>
+        {{ form.unit(size=20) }}<br>
+        {% for error in form.unit.errors %}
+          [{{ error }}]
+        {% endfor %}
+      </div>
+      <div class="input-box">
+        {{ form.unit_cost.label }}<br>
+        {{ form.unit_cost }}<br>
+        {% for error in form.unit_cost.errors %}
+          [{{ error }}]
+        {% endfor %}
+      </div>
+      <div class="input-box">
+        {{ form.delivery_status.label }}<br>
+        {{ form.delivery_status }}<br>
+        {% for error in form.delivery_status.errors %}
+          [{{ error }}]
+        {% endfor %}
+      </div>
+
+      <div>
+          {{ form.submit()}}
+      </div>
+  </form>
+  <a href="{{ url_for('orders') }}">
+    <button class="body-font" id="cancel">Cancel</button>
+  </a>
+</div>
+{% endif %}
+
+
+
+<!-- Search results page structure-->
+{% if search_results %}
+<!-- Checks if paginated orders is empty i.e if user has no orders -->
+{% if search_results.total == 0 %}
+  <div class="table-container">
+    <div class="empty">
+      Sorry, no order with this product name was found,<br> Please cross-check and try again
+    </div>
+  </div> 
+{% else %}
+<form method="POST">
+  <label for="filters"  class="filters bold"></label>
+  <select class="filters" name="filter_by" onchange="this.form.submit()">
+    <option id="empty" value="null"></option>
+  </select>
+</form>
+<section class="table-view" id="orders-table">
+  <div class="space">
+    <table>
+      <thead>
+        <tr id="head">
+            <th>S/N</th>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Vendor</th>
+            <th>Quantity</th>
+            <th>Unit Cost</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+      </thead>
+      {% for order in search_results.items %}
+      <tbody>
+        <tr id="table-body">
+          <td>{{ loop.index }}</td>
+          <td>{{ order.product_name }}</td>
+          <td>{{ order.description }}</td>
+          <td>{{ order.vendor_name }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.unit_cost }}/{{ order.unit }}</td>
+          <td>{{ order.created_at.strftime('%d-%b-%Y') }} {{ order.created_at.strftime('%H:%M') }}</td>
+          {% if order.delivery_status == True %}
+            <td>Delivered</td>
+          {% else %}
+            <td>Not delivered</td>
+          {% endif %}
+          <td>
+            {% if order.delivery_status == False %}
+              <button class="main-btn">action</button>
+              <div class="action-btn">
+                  <form action="{{ url_for('edit_order', id=order.id) }}" method="POST"> 
+                    <button class="edit-btn" title="Edit this order" type="submit"></button>
+                  </form>
+                  <form action="{{ url_for('orders', id=order.id, filter_by='') }}" method="POST"> 
+                    <button class="delivered-btn" title="Mark as delivered" type="submit" onclick="return confirm('Do you confirm that to have received this order?')"></button>
+                  </form>
+                <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                  <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
+                </form>
+              </div>
+
+            {% else %}
+              <!-- Check if order already has a review -->
+              {% if order.reviews|length == 0 %}
+                <button class="main-btn">Review</button>
+                <div class="action-btn">
+                    <form action="{{ url_for('create_review', order_id=order.id, vendor_id=order.vendor_id) }}" method="POST"> 
+                      <button class="review-btn" title="Review this order" type="submit"></button>
+                    </form>
+                    <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                      <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
+                    </form>
+                </div>
+              {% else %}
+                <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                  <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
+                </form>
+              {% endif %}
+            {% endif %}
+          </td>
+        </tr> 
+      </tbody>
+      {% endfor %}
+    </table>
+    {% for page_num in search_results.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+    {% if filter_by %}
+      <a class="body-font" href="{{ url_for('filter_orders', page=page_num, filter_by=filter_by) }}">{{ page_num }}</a>
+    {% else %}
+    <a class="body-font" href="{{ url_for('search', page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+      {% if search_results.page == page_num %}
+      <a class="body-font" id="current-page" href="{{ url_for('search', page=page_num)}}">{{ page_num }}</a>
+      {% endif %}
+    {% else %}
+      ...
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block main %}
+<section class="display-container">
+        <div class="stat-container"></div>
+        <!-- Widgets structure -->
+        <div class="widgets">
+            <!-- Vendors widget structure-->
+            <div class="widget-box">
+                <div class="innerbox">
+                    <div class="icon-and-name">
+                    <div class="icon" id="vendor-icon"></div>
+                    <div class="name">Registered vendors</div>
+                    </div>
+                    <div class="value">
+                    {% if tot_vendors == 0 %}
+                        0
+                    {% else %}
+                        {{ tot_vendors }}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Orders widget structure -->
+            <div class="widget-box">
+            <div class="innerbox">
+                <div class="icon-and-name">
+                <div class="icon" id="orders-icon"></div>
+                <div class="name">Number of orders</div>
+                </div>
+                <div class="value">
+                {% if tot_orders == 0 %}
+                    0
+                {% else %}
+                    {{ tot_orders }}
+                {% endif %}
+                </div>
+            </div>
+            </div>
+        
+            <!-- Reviews widget structure -->
+            <div class="widget-box">
+            <div class="innerbox">
+                <div class="icon-and-name">
+                <div class="icon" id="reviews-icon"></div>
+                <div class="name">Reviews</div>
+                </div>
+                <div class="value">
+                {% if tot_reviews == 0 %}
+                    0
+                {% else %}
+                    {{ tot_reviews }}
+                {% endif %}
+                </div>
+            </div>
+            </div>
+        </div>
+</section>
+{% endblock %}

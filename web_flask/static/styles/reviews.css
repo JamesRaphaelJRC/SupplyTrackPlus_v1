@@ -1,0 +1,106 @@
+.review-pg-body {
+    height: 79%;
+    width: 100%;
+}
+
+.review-disp-section {
+    /* border: 1px solid black; */
+    background-color: #e7e7e7;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    height: 93%;
+}
+
+.review-box {
+    width: 45%; /* Set to 50% for two cards per row */
+    height: auto;
+    /* border: 1px solid black; */
+    background-color: #213159;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 5px;
+    text-align: start;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+#actions {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+}
+
+.data-sect {
+    /* border: 1px solid greenyellow; */
+    margin-top: 2px;
+    background-color: #3d6098;
+    height: 35%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+#vendor-avatar {
+    /* border: 1px solid black; */
+    background-image: url('../images/avatar-100.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 11%;
+}
+
+#order-info {
+    /* border: 1px solid brown; */
+    height: 100%;
+    width: 76%;
+}
+
+.order-rating {
+    /* border: 1px solid yellow; */
+    height: 15%;
+    width: 70px;
+    background-image: url('../images/5star.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.order-rating#r0 {
+    background-image: url('../images/icons8-rating-off-48.png');
+    background-size: contain;
+}
+
+.order-rating#r1 {
+    background-image: url('../images/1star.png');
+}
+
+.order-rating#r2 {
+    background-image: url('../images/2star.png');
+}
+
+.order-rating#r3 {
+    background-image: url('../images/3star.png');
+}
+
+.order-rating#r4 {
+    background-image: url('../images/4star.png');
+}
+
+.order-rating#r5 {
+    background-image: url('../images/5star.png');
+}
+
+#review-comment {
+    /* border: 1px solid purple; */
+    height: 50%;
+    width: 100%;
+    overflow: scroll;
+}
