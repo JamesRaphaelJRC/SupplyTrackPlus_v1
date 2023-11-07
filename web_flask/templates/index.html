@@ -2,15 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>Welcome-SupplyTrackPlus</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css')}}">
 
 </head>
 <body>
-    <div class="container"></div>
+    <div class="upper-container">
+        <header>
+            <div id="logo"></div>
+            <div class="nav">
+                <div id="home">Home</div>
+                <div id="about">About Us</div>
+                <div id="vision">Our Vision</div>
+            </div>
+            <div class="accounts">
+                <!-- <div id="signup">SignUp/</div> -->
+                <a href="{{ url_for('login')}}"><div id="signIn">Sign In</div></a>
+            </div>
+        </header>
+        <div class="intro-container">
+            <div class="leftside-container">
+                <div class="side-intro-box">
+                    <div id="upper"></div>
+                    <div id="round-container">
+                        <div id="round-frame"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side-cont">
+                <h1>Supply<span style="color: red;">Track</span>Plus</h1>
+                <h4>Keep your supplies and Vendors<br>at arm's reach...</h4>
+                <a href="{{ url_for('signUp')}}"><button id="register">Register Now</button></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="lower-container">
+        <a href="mailto:jamesraphaeljrc@gmail.com"><div id="mail"></div></a>
+        <label for="mail">Email us</label>
+    </div>
 </body>
-<footer></footer>
 </html>
 

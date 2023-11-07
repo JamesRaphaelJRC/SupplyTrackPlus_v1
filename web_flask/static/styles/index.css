@@ -1,30 +1,186 @@
-/* body {
-    background-color: #f5f5f5;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); Subtle shadow at the top
-}
- */
 body {
     height: 100vh;
     width: 100vw;
     background-color: #e7e7e7;
-}
- .container {
-    border: 1px solid black;
-    height: 60%;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 0;
     padding: 0;
-    background-color: #3d6098;
+    background-image: url('../images/newash.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+ .upper-container {
+    /* border: 1px solid black; */
+    height: 90%;
+    width: 100%;
+    padding-bottom: 10px;
+    /* background: linear-gradient(to bottom, rgb(12, 26, 59), rgb(27, 60, 117)); Darker to lighter blue gradient */
+    color: white;
+    /* background-color: rgb(33, 49, 89); */
  }
 
- header {
-    border: 1px solid black;
+ .lower-container {
+    border: 1px solid green;
+    height: 9%;
     width: 100%;
-    height: 15%;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
  }
  
-footer {
+ a {
+    text-decoration: none;
+    color: white;
+ }
+
+/* footer {
     border: 1px solid blue;
+    height: 7vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+} */
+
+header {
     height: 10%;
     width: 100%;
+    background-color: rgb(12, 26, 59);
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+#logo {
+    /* border: 1px solid brown; */
+    width: 15%;
+    height: 100%;
+    background-image: url('../images/Colorlogonobackground.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.nav {
+    /* border: 1px solid yellow; */
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 500;
+}
+
+.accounts {
+    /* border: 1px solid red; */
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 4%;
+    /* gap: 30px; */
+    align-items: center;
+    justify-content: end;
+    color: white;
+    font-weight: 500;
+}
+
+.intro-container {
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.leftside-container {
+    /* border: 1px solid red; */
+    height: 100%;
+    width: 70%;
+    background-image: url('../images/shipment-cont.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 2px;
+}
+
+.side-intro-box {
+    /* border: 1px solid white; */
+    height: 100%;
+    width: 40%;
+    float: right;
+    display: flex;
+    flex-direction: column;
+}
+
+#upper {
+    /* border: 1px solid black; */
+    height: 35%;
+    width: 100%;
+}
+
+#round-container {
+    height: 60%;
+    width: 100%;
+}
+
+#round-frame {
+    /* border: 1px solid gray; */
+    float: right;
+    height: 100%;
+    width: 68.5%;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-image: url('../images/conversation.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.right-side-cont {
+    border: 1px solid purple;
+    height: 100%;
+    width: 30%;
+}
+
+.right-side-cont h1, h4 {
+    font-family: 'Brush Script MT', cursive;
+    margin-top: 10px;
+    font-size: 50px;
+    margin-bottom: 0;
+    text-align: center;
+    color: rgb(12, 26, 59);
+}
+
+.right-side-cont h4 {
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+#register {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 15px 30px;
+    background-color: rgb(238, 26, 26);
+    margin-left: 25%;
+    margin-top: 50px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Optional: Add hover effect to the button */
+#register:hover {
+    background-color: #45a049; /* Darken the background color on hover */
+}
+
+#mail {
+    height: 30px;
+    width: 30px;
+    background-image: url(../images/emailblue.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 15px;
 }
