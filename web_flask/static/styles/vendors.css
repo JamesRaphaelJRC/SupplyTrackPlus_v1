@@ -40,8 +40,9 @@
 }
 
 .card-box {
-    /* border: 1px solid black; */
+    border: 1px solid rgb(0, 0, 0, 0.5);
     width: calc(20% - 0px); 
+    border-radius: 10px;
     height: 100px;
     margin: 20px;
     background-color: #ccc;
@@ -50,6 +51,16 @@
     display: flex;
     flex-direction: row;
     /* gap: 5px; */
+}
+
+.card-box a {
+    text-decoration: none;
+    width: 100%; /* Take full width of the card-box */
+    height: 100%; /* Take full height of the card-box */
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: inherit; 
 }
 
 @media (max-width: 768px) {
@@ -78,14 +89,15 @@
     margin-right: -7px;
 }
 
-#data {
+.data {
     border-bottom: 1px solid blue;
-    width: auto;
+    width: 200px;
     height: 20%;
     text-align: left;
     font-size: 12px;
-    text-overflow: clip;
-    overflow: scroll;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /*
@@ -150,7 +162,7 @@
     width: 100%;
     margin-bottom: 5px;
     font-size: 12px;
-    font-weight: 500;
+    /* font-weight: 500; */
     text-align:justify;
 
 }
@@ -167,4 +179,85 @@
     background-image: url('../images/table-clear.png');
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+/*
+    =========================
+    Vendor view page styling
+    =========================
+*/
+.table-container#vendor-view {
+    height: 82%;
+    border: 0;
+}
+#page-head {
+    /* border: 1px solid red; */
+    margin: 1% 5% 0 5%;
+    background-color: rgb(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: row;
+}
+
+.vendor-cont h3,
+#page-head h2 {
+    margin: 0;
+    width: 96%;
+    text-align: center;
+}
+
+#page-head form {
+    /* border: 1px solid yellow; */
+    width: 4%;
+}
+
+.table-container .vendor-cont {
+    background-color: rgb(255, 255, 255, 0.6);
+    margin: 0.5% 5% 0% 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.table-container .vendor-cont .left,
+.table-container .vendor-cont .right {
+    /* border: 1px solid black; */
+    width: 50%;
+    margin-left: 20px;
+}
+
+.table-container .vendor-cont .right {
+    margin-left: 0;
+}
+
+.vendor-cont .info {
+    /* border: 1px solid brown; */
+    margin-left: 60px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: scroll;
+    text-overflow: ellipsis;
+}
+
+.vendor-cont .info#created {
+    margin-left: 12px;
+}
+
+.vendor-cont .info#mobile {
+    margin-left: 14px;
+}
+
+h2 {
+    margin: 0;
+}
+
+/* Styling got statistics section of the vendor profile page */
+.vendor-cont#stat {
+    margin-top: 0;
+}
+
+.left#stat {
+    width: 100%;
+}
+
+.stat {
+    font-weight: 400;
 }

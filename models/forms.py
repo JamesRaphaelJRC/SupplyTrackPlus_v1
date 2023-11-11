@@ -54,14 +54,25 @@ class VendorForm(FlaskForm):
     submit = SubmitField('Done')
 
     current_user_username = None
+    edit_mode = False
+    old_vendor_name = ""
+    old_vendor_email = ""
 
     def validate_name(self, name):
         ''' Checks if vendor name already exists for the current user '''
         vendors = storage.all(self.current_user_username, 'Vendor')
         if vendors:
-            if any(vendor.name == name.data for vendor in vendors.values()):
-                raise ValidationError(
-                    'Vendor already exists. Kindly consider another name')
+            if self.edit_mode == False:
+                if any(vendor.name == name.data for vendor in vendors.\
+                       values()):
+                    raise ValidationError(
+                        'Vendor already exists. Kindly consider another name')
+            if self.edit_mode == True:
+                for vendor in vendors.values():
+                    if vendor.name == name.data and vendor.name !=\
+                        self.old_vendor_name:
+                        raise ValidationError('Vendor name already in use.\
+                                              Use another name')
 
     def validate_email(self, email):
         ''' Checks if a vendor with same email already exists for the current
@@ -69,8 +80,17 @@ class VendorForm(FlaskForm):
         '''
         vendors = storage.all(self.current_user_username, 'Vendor')
         if vendors:
-            if any(vendor.email == email.data for vendor in vendors.values()):
-                raise ValidationError('Email already exixts for a vendor')
+            if self.edit_mode == False:
+                if any(vendor.email == email.data for vendor in vendors.\
+                       values()):
+                    raise ValidationError('Email already exixts for a vendor')
+            if self.edit_mode == True:
+                for vendor in vendors.values():
+                    if vendor.email == email.data and vendor.email !=\
+                        self.old_vendor_email:
+                        raise ValidationError('Email already in use for a\
+                                              vendor')
+
 
 
 class OrderForm(FlaskForm):
@@ -92,12 +112,14 @@ class ReviewForm(FlaskForm):
     vendor_id = SelectField('Vendor', coerce=str, validators=[DataRequired()])
     order_id = SelectField('Order', coerce=str, validators=[DataRequired()])
     content = StringField('Review')
-    rating = SelectField('Rating', validators=[DataRequired()], choices=ratings)
+    rating = SelectField('Rating', validators=[DataRequired()],\
+                         choices=ratings)
     submit = SubmitField('Done')
 
 
 class SearchForm(FlaskForm):
     ''' Defines the search form '''
     searched = StringField('Searched', validators=[DataRequired()])
-    option = RadioField("option", choices=[('Vendor', 'Vendor'), ('Order', 'Order')], validators=[DataRequired()])
+    option = RadioField("option", choices=[('Vendor', 'Vendor'),\
+                            ('Order', 'Order')], validators=[DataRequired()])
     submit = SubmitField('Go')

@@ -16,23 +16,12 @@ def get_vendor(vendor_id):
     vendor_dict.update({'total_orders': total_orders})
     vendor_dict.update({'open_orders': open_orders})
     vendor_dict.update({'closed_orders': closed_orders})
-
+    print('cme here')
     # Remove the unserializable orders of type Object
     del vendor_dict['orders']
 
     username = current_user.username
-
-    vendor_reviews = [ review for review in storage.all(username, 'Review').\
-                      values() if review.vendor_id == vendor_id]
-    tot_rating = 0
-    num_ratings = len(vendor_reviews) # Since every review must have a rating
-
-    tot_rating = sum(review.rating for review in vendor_reviews)
-    
-    try:
-        avr_review = tot_rating / num_ratings
-    except ZeroDivisionError:
-        avr_review = 0
+    avr_review = storage.get_average_reviews(username, vendor_id)
 
     vendor_dict.update({'avr_review': avr_review})
 

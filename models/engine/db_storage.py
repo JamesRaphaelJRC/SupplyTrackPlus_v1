@@ -60,7 +60,7 @@ class DBStorage:
 
 
     def validate_user(self, username, password):
-        ''' Validates a user credentials
+        ''' Validates a user's credentials
             Returns:
                     False - If username or email is not registered or password
                             is invalid
@@ -177,6 +177,23 @@ class DBStorage:
             orders = orders.order_by(Order.product_name).paginate(page=page,\
                             per_page=per_page, error_out=False)
             return orders
+
+
+    def get_average_reviews(self, username, vendor_id):
+        ''' Calculates and returns the average review for all products
+            delivered by a given vendor for a registered user.
+        '''
+        vendor_reviews = [ review for review in self.all(username, 'Review').\
+                      values() if review.vendor_id == vendor_id]
+        
+        num_ratings = len(vendor_reviews) # Every review have a rating
+        sum_ratings = sum(review.rating for review in vendor_reviews)
+
+        try:
+            avr_review = sum_ratings / num_ratings
+        except ZeroDivisionError:
+            avr_review = 0
+        return avr_review
 
 
     def new(self, obj):

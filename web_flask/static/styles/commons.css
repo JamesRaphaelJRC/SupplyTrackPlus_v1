@@ -3,6 +3,9 @@ body {
     padding: 0;
     font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     height: 95vh;
+    background-image: url('../images/newash.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
     /* position: absolute; */
 }
 
@@ -15,12 +18,12 @@ header {
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    background: #141414d3;; /* rgb(168, 166, 166) */
+    background: #141414d3; /* rgb(168, 166, 166) */
 }
 
 footer {
     height: 5vh;
-    background-color: #213159;
+    background-color: #080707d3;;
     color: #f04b4c;
     text-align: center;
     font-size: 10;
@@ -82,8 +85,11 @@ a {
 }
 
 #avatar {
+    text-align: center;
+    color: white;
     /* border: 1px solid green; */
     margin-left: 30px ;
+    margin-top: 10px;
     height: 100%;
     width: 60px;
     border-radius: 50%;
@@ -106,7 +112,6 @@ a {
     left: -500px;
     background-color: #141414d3;
     transition: 0.3s;
-
 }
 
 .drawer.open {
@@ -187,6 +192,7 @@ a {
     background-size: contain;
     background-color: inherit;
     border: 0;
+    cursor: pointer;
 }
 
 
@@ -268,9 +274,10 @@ a {
 
 /* Customized box for settings */
 .view-box#logout {
-    margin-top: 310px;
+    margin-top: 200%;
     margin-bottom: 0px;
     /* border: 1px solid white; */
+    text-align: center;
 }
 
 .view-box#logout:hover {
@@ -283,6 +290,10 @@ a {
     height: 35px;
     color: white;
     margin: 0px 10px 20px 0px;
+}
+
+#page-name {
+    font-weight: 700;
 }
 
 .page-indicator {

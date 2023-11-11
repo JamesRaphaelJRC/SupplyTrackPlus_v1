@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>SupplyTrackPlus</title>
+
+    <!--FavIcon-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/browser.png') }}">
+
+
      <!-- Link to CSS file using url_for -->
      <link rel="stylesheet" href="{{ url_for('static', filename='styles/commons.css')}}">
      <link rel="stylesheet" href="{{ url_for('static', filename='styles/vendors.css')}}">
@@ -12,7 +17,8 @@
    
      <!-- Links to jquery library and javascript file-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='scripts/new.js' )}}"></script>
+    <script src="{{ url_for('static', filename='scripts/vendors.js' )}}"></script>
+    <script src="{{ url_for('static', filename='scripts/reviews.js' )}}"></script>
 </head>
 <body>
     <header>
@@ -45,10 +51,10 @@
             </div></a>
         </div>
         <div id="user-info">
-            <div id="avatar"></div>
             {% if user %}
             <div id="username">@{{ user.first_name }} {{ user.last_name }}</div>
             {% endif %}
+            <a href="{{ url_for('logout')}}"><div id="avatar">logout</div></a>
         </div>
     </header>
 
@@ -91,13 +97,13 @@
               {% endif %}
             </div>
           </a>
-          <a href="{{ url_for('logout') }}">
-            <div class="view-box" id="logout">
-              <div class="icon-box" id="logout"></div>
-              <div class="name-box" id="logout"><h5>Logout</h5></div>
-            </div>
-          </a>
         </div>
+        <a href="{{ url_for('logout') }}">
+          <div class="view-box" id="logout">
+            <div class="icon-box" id="logout"></div>
+            <div class="name-box" id="logout"><h5>Logout</h5></div>
+          </div>
+        </a>
     </section>
     <div class="secondHead">
         <div class="page-info">

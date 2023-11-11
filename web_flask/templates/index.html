@@ -1,27 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <title>Welcome-SupplyTrackPlus</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css')}}">
-
-</head>
-<body>
-    <div class="upper-container">
-        <header>
-            <div id="logo"></div>
-            <div class="nav">
-                <div id="home">Home</div>
-                <div id="about">About Us</div>
-                <div id="vision">Our Vision</div>
-            </div>
-            <div class="accounts">
-                <!-- <div id="signup">SignUp/</div> -->
-                <a href="{{ url_for('login')}}"><div id="signIn">Sign In</div></a>
-            </div>
-        </header>
+{% extends 'base_landing.html' %}
+{% block content %}
         <div class="intro-container">
             <div class="leftside-container">
                 <div class="side-intro-box">
@@ -37,12 +15,11 @@
                 <a href="{{ url_for('signUp')}}"><button id="register">Register Now</button></a>
             </div>
         </div>
-    </div>
-
-    <div class="lower-container">
-        <a href="mailto:jamesraphaeljrc@gmail.com"><div id="mail"></div></a>
-        <label for="mail">Email us</label>
-    </div>
-</body>
-</html>
+        </div>
+        <div class="lower-container">
+            <a href="mailto:jamesraphaeljrc@gmail.com"><div id="mail"></div></a>
+            <label for="mail">Email us</label>
+        </div>
+    </body>
+{% endblock %}
 

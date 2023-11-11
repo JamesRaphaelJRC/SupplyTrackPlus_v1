@@ -20,12 +20,12 @@ body {
  }
 
  .lower-container {
-    border: 1px solid green;
-    height: 9%;
+    /* border: 1px solid green; */
+    height: 10%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
  }
  
@@ -89,10 +89,15 @@ header {
 }
 
 .intro-container {
-    height: 85%;
+    /* border: 1px solid black; */
+    height: 95%;
     width: 100%;
     display: flex;
     flex-direction: row;
+}
+
+#signIn {
+    margin-right: 5px;
 }
 
 .leftside-container {
@@ -123,30 +128,33 @@ header {
 #round-container {
     height: 60%;
     width: 100%;
+    float: right;
 }
 
 #round-frame {
     /* border: 1px solid gray; */
     float: right;
     height: 100%;
-    width: 68.5%;
+    width: 75%;
+    /* margin-top: 50px; */
     border-radius: 50%;
-    margin-right: 10px;
+    /* margin-right: -100px; */
     background-image: url('../images/conversation.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
 }
 
 .right-side-cont {
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
     height: 100%;
     width: 30%;
 }
 
 .right-side-cont h1, h4 {
-    font-family: 'Brush Script MT', cursive;
+    /* font-family: 'Brush Script MT', cursive; */
     margin-top: 10px;
-    font-size: 50px;
+    font-size: 45px;
     margin-bottom: 0;
     text-align: center;
     color: rgb(12, 26, 59);
@@ -183,4 +191,108 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     margin-left: 15px;
+}
+
+/*
+    ====================
+    About page styling
+    ====================
+*/
+.intro-container#about {
+    height: auto;
+    flex-direction: column;
+    background-image: url('../images/newash.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.row-cont {
+    /* border: 1px solid blue; */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    /* height: 300px; */
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+.pic {
+    border: 1px solid green;
+    height: 300px;
+    width: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.pic#intro {
+    background-image: url('../images/intro.jpg');
+    border-radius: 10%;
+}
+
+#writeup {
+    text-align: center;
+    color: rgb(12, 26, 59);
+    font-size: 20px;
+    font-weight: 500;
+    text-indent: 10px;
+    line-height: 1.5;
+}
+
+.row-cont#ourstory {
+    flex-direction: row-reverse;
+}
+#ourstory #writeup {
+    border: 1px solid rgb(128, 128, 128, 0.2);
+    font-size: 15px;
+    height: 400px;
+    width: 700px;
+    word-wrap: break-word;
+    overflow: scroll;
+}
+#ourstory .pic {
+    /* border: 1px solid red; */
+    border-radius: 50%;
+    width: 400px;
+    height: 400px;
+    background-image: url('../images/ourstory.jpg');
+}
+
+#writeup h2 {
+    margin: 0;
+}
+
+.pic#team {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background-image: url('../images/icons8-avatar-100.png');
+    background-position: center;
+}
+
+#github {
+    height: 70px;
+    width: 70px;
+    background-image: url('../images/629b7a8e7c5cd817694c322e.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#linkedin {
+    height: 50px;
+    width: 50px;
+    background-image: url('../images/icons8-linkedin-240.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#team #writeup #info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#team #writeup h5 {
+    margin: 0;
 }

@@ -15,8 +15,8 @@
     /* border: 1px solid blue; */
     height: 100%;
     width: 35%;
-    border-right: 2px solid gray;
-    background-color: rgb(41, 99, 137);
+    /* border-right: 2px solid gray; */
+    background-color: rgb(41, 99, 137, 0.1);
 }
 
 .widgets {
@@ -36,7 +36,7 @@
     /* border: 1px solid brown; */
     flex: 1 1 0;
     /* width: 200px; */
-    background-color: #e7e7e7;
+    background-color: rgb(219, 215, 215, 0.3);
     /* background: rgb(46, 156, 204, 0.3); */
     max-width: 100%;
     min-width: 10%;
@@ -44,7 +44,6 @@
     /* box-shadow: 0px 1.9444444179534912px 10px rgba(128, 128, 128, 0.3); */
     border-radius: 23.33px;
     flex-direction: column;
-    /* justify-content: flex-start; */
     align-items: center;
     gap: 7px;
     display: inline-flex;

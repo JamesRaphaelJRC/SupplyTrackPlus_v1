@@ -2,7 +2,6 @@
 from flask import render_template, flash, redirect, url_for, request, jsonify
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.urls import url_parse
-import re
 from models.forms import *
 from web_flask import app
 from models import storage
@@ -10,8 +9,14 @@ from api.views.vendors import *
 
 
 @app.route('/')
-def welcome_page():
-    return render_template('index.html')
+def landing_page():
+    return render_template('index.html', page='Home')
+
+
+@app.route('/about')
+def about():
+    ''' Returns the about page '''
+    return render_template('about.html', page='About')
 
 
 @app.route('/user/profile')
@@ -49,7 +54,7 @@ def logout():
     ''' Handles user logout '''
     logout_user()
     # flash("Successfully logged out")
-    return redirect(url_for('welcome_page'))
+    return redirect(url_for('landing_page'))
 
 
 @app.route('/signUp', methods=['GET', 'POST'])
@@ -113,14 +118,33 @@ def create_vendor():
     return render_template('vendors.html', form=form, page='New Vendor')
 
 
+@app.route('/user/vendors/<string:id>/view')
+@login_required
+def view_vendor(id):
+    ''' Returns the view page of the selected vendor '''
+    username = current_user.username
+    vendor = storage.get('Vendor', id)
+    vendor_avr_review = storage.get_average_reviews(username, id)
+    return render_template('vendors.html', selected_vendor=vendor,\
+                           page='Vendors', avr_review=vendor_avr_review)
+
+
 @app.route('/user/vendors/<string:id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_vendor(id):
     ''' Edit and updates an already existing vendor '''
     vendor = storage.get('Vendor', id)
+    old_name = vendor.name
+    old_email = vendor.email
 
     # Pre-fills the form with the old vendor information
     form = VendorForm(obj=vendor)
+
+    # Set edit mode to True and passes the old name and email for validation
+    form.edit_mode = True
+    form.old_vendor_name = old_name
+    form.old_vendor_email = old_email
+    form.current_user_username = current_user.username
     if form.validate_on_submit():
         form.populate_obj(vendor)
         storage.save()
