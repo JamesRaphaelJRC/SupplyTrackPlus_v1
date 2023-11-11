@@ -16,7 +16,6 @@ def get_vendor(vendor_id):
     vendor_dict.update({'total_orders': total_orders})
     vendor_dict.update({'open_orders': open_orders})
     vendor_dict.update({'closed_orders': closed_orders})
-    print('cme here')
     # Remove the unserializable orders of type Object
     del vendor_dict['orders']
 
