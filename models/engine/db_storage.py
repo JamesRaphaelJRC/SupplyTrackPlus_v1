@@ -189,14 +189,14 @@ class DBStorage:
 
         if cls == Vendor:
             vendors = Vendor.query.filter_by(user_id=user_id)
-            vendors = vendors.filter(Vendor.name.like(\
+            vendors = vendors.filter(Vendor.name.ilike(\
                 '%' + search_word + '%'))
             vendors = vendors.order_by(Vendor.name).paginate(page=page,\
                             per_page=per_page, error_out=False)
             return vendors
         elif cls == Order:
             orders = Order.query.filter_by(user_id=user_id)
-            orders = orders.filter(Order.product_name.like(\
+            orders = orders.filter(Order.product_name.ilike(\
                 '%' + search_word + '%'))
             orders = orders.order_by(Order.product_name).paginate(page=page,\
                             per_page=per_page, error_out=False)
