@@ -218,7 +218,7 @@ header {
 }
 
 .pic {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     height: 300px;
     width: 500px;
     background-repeat: no-repeat;
@@ -244,7 +244,7 @@ header {
     flex-direction: row-reverse;
 }
 #ourstory #writeup {
-    border: 1px solid rgb(128, 128, 128, 0.2);
+    /* border: 1px solid rgb(128, 128, 128, 0.2); */
     font-size: 15px;
     height: 400px;
     width: 700px;

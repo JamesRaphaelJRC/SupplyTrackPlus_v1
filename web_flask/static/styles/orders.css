@@ -2,8 +2,12 @@
     /* border: 1px solid black; */
     height: min(79%);
 }
-.grouped-orders {
+.grouped-header {
     /* border: 1px solid red; */
+    border-top: 1px solid gray;
+    /* border-bottom: 0; */
+    cursor: pointer;
+    font-size: 14px;
     /* margin: 1px; */
     width: 70%;
     height: 30px;
@@ -12,7 +16,7 @@
 }
 
 .grouped-container#view_order {
-    border: 2px solid  rgb(33, 49, 89,0.5);
+    /* border: 2px solid  rgb(33, 49, 89,0.5); */
     border-left: 0;
     border-right: 0;
     margin: 1% 5% 0 1%;
@@ -87,4 +91,13 @@ p#tot {
 
 #view-order-opt {
     float: right;
+}
+
+.grouped-orders {
+    display: none;
+    font-size: 14px;
+}
+
+.grouped-item ul {
+    margin: 0
 }

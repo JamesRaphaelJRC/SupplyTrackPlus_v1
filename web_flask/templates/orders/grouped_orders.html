@@ -15,16 +15,17 @@
     <h3>&nbsp;Grouped Orders according to vendors</h3>
   {% if grouped_orders %}
       {% for name, orders in grouped_orders.items() %}
-      <li>
-          <select class="grouped-orders">
-              <option><strong>&nbsp;{{ name }}   ({{ orders|length }})</strong></option>
-              {% for order in orders %}
-              <option>&nbsp;{{ order.product_name }}</option>
-              {% endfor %}
-          </select>
+      <li class="grouped-item">
+          <div class="grouped-header">
+            <strong>&nbsp;{{ name }}   ({{ orders|length }})</strong>
+          </div>
+          <ul class="grouped-orders">
+            {% for order in orders %}
+          <li><a href="{{ url_for('user_views.view_order', id=order.id) }}">&nbsp;{{ order.product_name }}</a></li>
+            {% endfor %}
+          </ul>
       </li>
       {% endfor %}
-
   {% endif %}
 </div>
 {% endblock %}

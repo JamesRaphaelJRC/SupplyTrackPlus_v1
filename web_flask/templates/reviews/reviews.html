@@ -10,7 +10,6 @@
     </div>
 </div> 
 {% else %}
-<div class="review-pg-body">
   <div class="review-disp-section">
     {% for review in reviews.items %}
       <div class="review-box">
@@ -46,7 +45,6 @@
       </div>
     {% endfor %}
   </div>
-</div>
 {% for page_num in reviews.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
   {% if page_num %}
     <a class="body-font" href="{{ url_for('user_views.reviews', page=page_num) }}">{{ page_num }}</a>

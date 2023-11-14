@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    height: 95vh;
+    height: 100vh;
     background-image: url('../images/newash.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -20,6 +20,13 @@ body {
     }
 }
 
+a {
+    color: brown;
+}
+
+a:visited {
+    color: brown;
+}
 
 header {
     height: 50px; 
