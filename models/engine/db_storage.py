@@ -2,7 +2,6 @@
 ''' Defines the DBStorage class '''
 
 
-
 class DBStorage:
     ''' Defines methods that interact with the database '''
 
@@ -181,6 +180,7 @@ class DBStorage:
             option: The class to search in.
             Return: A list of paginated objects containing the search_word
         '''
+        from sqlalchemy import or_
         from models.vendor import Vendor
         from models.order import Order
 
@@ -196,8 +196,10 @@ class DBStorage:
             return vendors
         elif cls == Order:
             orders = Order.query.filter_by(user_id=user_id)
-            orders = orders.filter(Order.product_name.ilike(\
-                '%' + search_word + '%'))
+            
+            # Searcch in both product_name and description column
+            orders = orders.filter(or_(Order.product_name.ilike(\
+                '%' + search_word + '%'), Order.description.ilike('%' + search_word + '%')))
             orders = orders.order_by(Order.product_name).paginate(page=page,\
                             per_page=per_page, error_out=False)
             return orders
