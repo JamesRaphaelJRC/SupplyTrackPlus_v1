@@ -9,6 +9,18 @@ body {
     /* position: absolute; */
 }
 
+/* Adjust font sizes for smaller screens using media queries */
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 0.5em;
+    }
+
+    h1 {
+        font-size: 1.8em; /* Adjusted size for smaller screens */
+    }
+}
+
+
 header {
     height: 50px; 
     /* border-bottom: 1px solid #CCCCCC; */
@@ -22,11 +34,11 @@ header {
 }
 
 footer {
-    height: 5vh;
+    height: 6vh;
     background-color: #080707d3;;
     color: #f04b4c;
     text-align: center;
-    font-size: 10;
+    font-size: 15px;
     font-weight: 500;
 }
 a {
@@ -40,6 +52,7 @@ a {
     position: relative;
     background-image: url('../images/darhboard.png');
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 #logo {
@@ -50,13 +63,14 @@ a {
     background: url(../images/Black-logo-nobackground.png);
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
 }
 
 .head-nav-container {
     /* border: 1px solid black; */
     height: 100%;
     width: 50%;
-    gap: 30px;
+    gap: 10%;
     display: flex;
     flex-direction: row;
 }
@@ -64,10 +78,10 @@ a {
 .nav {
     /* border: 1px solid rebeccapurple; */
     height: 65%;
-    width: 75px;
+    /* width: 100%; */
     margin-top: 15px;
     padding: 0;
-    font-size: 15px;
+    font-size: 1em;
     color: white;
     text-align: center;
     font-weight: 500;
@@ -77,10 +91,13 @@ a {
     /* border: 1px solid red; */
     height: 100%;
     /* margin-top: 15px; */
-    width: 30%;
-    float: right;
+    width: 25%;
+    /* float: right; */
     display: flex;
     flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: end;
     gap: 10px;
 }
 
@@ -88,34 +105,21 @@ a {
     text-align: center;
     color: white;
     /* border: 1px solid green; */
-    margin-left: 30px ;
-    margin-top: 10px;
+    /* margin-left: 30% ; */
+    /* margin-top: 20%; */
     height: 100%;
-    width: 60px;
-    border-radius: 50%;
+    /* width: 60px; */
+    /* border-radius: 50%; */
 }
 
 #username {
     /* border: 1px solid darkblue; */
-    margin-top: 10px;
-    height: 70%;
-    width: 60%;
+    /* margin-top: 10px; */
+    /* height: 70%; */
+    /* width: 60%; */
     text-align: end;
     color: white;
     font-weight: 500;
-}
-.drawer {
-    /* border: 1px solid blue; */
-    position: fixed;
-    height: 93%;
-    width: 10%;
-    left: -500px;
-    background-color: #141414d3;
-    transition: 0.3s;
-}
-
-.drawer.open {
-    left: 0;
 }
 
 .secondHead {
@@ -250,8 +254,32 @@ a {
     Side panel styling
     ====================
 */
+.drawer {
+    /* border: 1px solid blue; */
+    position: fixed;
+    height: 95vh;
+    width: 10%;
+    left: -500px;
+    background-color: #141414d3;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Adjust font sizes for smaller screens using media queries */
+@media only screen and (max-width: 600px) {
+    .drawer {
+        width: 15%;
+    }
+}
+
+.drawer.open {
+    left: 0;
+}
+
 .views-container {
     display: flex;
+    height: 80%;
     flex-direction: column;
     align-items: center;
     margin-top: 65px;
@@ -266,6 +294,7 @@ a {
     display: flex;
     margin-bottom: 10px;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .view-box:hover {
@@ -274,7 +303,7 @@ a {
 
 /* Customized box for settings */
 .view-box#logout {
-    margin-top: 200%;
+    /* margin-top: 100%; */
     margin-bottom: 0px;
     /* border: 1px solid white; */
     text-align: center;
@@ -359,6 +388,14 @@ th, td {
     font-size: 14px;
     font-weight: 400;
 }
+
+/* Adjust font sizes for smaller screens using media queries */
+@media only screen and (max-width: 600px) {
+  th, td {
+    font-size: 0.5em;
+  }
+}
+
 
 /* Additional Style for the data in the table head */
 #head th {

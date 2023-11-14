@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 ''' Defines the DBStorage class '''
-from web_flask import db
-from models.user import User
-from models.vendor import Vendor
-from models.order import Order
-from models.review import Review
+
 
 
 class DBStorage:
@@ -15,7 +11,15 @@ class DBStorage:
     option = ""
 
     # Used by the globals() to convert classname in str to actual class
-    classes = [User, Vendor, User, Order]
+    # classes = [User, Vendor, User, Order]
+    def get_class(self, cls):
+        ''' Convers a string Class name to an actual class '''
+        from models.user import User
+        from models.vendor import Vendor
+        from models.order import Order
+        from models.review import Review
+
+        return eval(cls)
 
     def create_user(self, first, last, email, username, passwd, phone_no):
         ''' Creates a new User object, generates a password_hash with the
@@ -24,6 +28,8 @@ class DBStorage:
             Return:
                 The newly created User object
         '''
+        from models.user import User
+
         new_user = User(first_name=first, last_name=last, email=email,
                         username=username, password_hash=passwd,
                         phone_number=phone_no)
@@ -33,6 +39,8 @@ class DBStorage:
 
     def create_vendor(self, name, email, phone_no, address, user_id):
         ''' Creates and returns a new Vendor object '''
+        from models.vendor import Vendor
+
         new_vendor = Vendor(name=name, email=email, phone_number=phone_no,
                             address=address, user_id = user_id)
         return new_vendor
@@ -46,6 +54,8 @@ class DBStorage:
                         status - delivery status, u_id - user_id
                         v_id - vendor_id
         '''
+        from models.order import Order
+
         new_order = Order(product_name=product, description=desc, quantity=qty,
                           unit=unit, unit_cost=cost, delivery_status=status,
                           user_id=u_id, vendor_id=v_id)
@@ -54,6 +64,8 @@ class DBStorage:
 
     def create_review(self, content, v_id, o_id, u_id, rating):
         ''' Creates a Review object and returns the created object '''
+        from models.review import Review
+
         new_review = Review(content=content, vendor_id=v_id, order_id=o_id,\
                             user_id=u_id, rating=rating)
         return new_review
@@ -66,6 +78,8 @@ class DBStorage:
                             is invalid
                     True -  If credentials are valid
         '''
+        from models.user import User
+
         user = User.query.filter_by(username=username).first()
         if not user:
             user = User.query.filter_by(email=username).first()
@@ -83,6 +97,8 @@ class DBStorage:
                     True if email already exists
                     False if email does not exist in the database
         '''
+        from models.user import User
+
         user = User.query.filter_by(email=email).first()
         if user:
             return True
@@ -91,6 +107,8 @@ class DBStorage:
 
     def get_user(self, username):
         ''' Gets a User object from the database using the unique username '''
+        from models.user import User
+
         if username:
             user = User.query.filter_by(username=username).first()
             return user
@@ -100,6 +118,8 @@ class DBStorage:
         ''' Returns the number of open/undelivered orders
             made by a given user
         '''
+        from models.order import Order
+
         user_id = self.get_user(username).id
         open_orders = Order.query.filter_by(user_id=user_id,\
                                             delivery_status=False).all()
@@ -116,7 +136,8 @@ class DBStorage:
             user_id = self.get_user(username).id
             if type(cls) is str:
                 # converts to the actual class if cls is a string.
-                cls = globals()[cls]
+                # cls = globals()[cls]
+                cls = self.get_class(cls)
 
             obj_dict = {}
             instances = cls.query.filter_by(user_id=user_id).all()
@@ -145,7 +166,7 @@ class DBStorage:
         if cls:
             user_id = self.get_user(username).id
             if type(cls) is str:
-                cls = globals()[cls]
+                cls = self.get_class(cls)
 
             if filter in filters:
                 keyword = filters.get(filter)
@@ -160,7 +181,10 @@ class DBStorage:
             option: The class to search in.
             Return: A list of paginated objects containing the search_word
         '''
-        cls = globals()[option]
+        from models.vendor import Vendor
+        from models.order import Order
+
+        cls = self.get_class(option)
         user_id = self.get_user(username).id
 
         if cls == Vendor:
@@ -198,16 +222,22 @@ class DBStorage:
 
     def new(self, obj):
         ''' Adds an object to the current database session '''
+        from web_flask import db
+
         db.session.add(obj)
 
 
     def save(self):
         ''' Commits all changes in the database session '''
+        from web_flask import db
+
         db.session.commit()
 
 
     def delete(self, obj):
         ''' Deletes an object from the current database session '''
+        from web_flask import db
+
         db.session.delete(obj)
 
 
@@ -215,9 +245,11 @@ class DBStorage:
         ''' Deletes an object of a given class, for a given user from the
             database
         '''
+        from web_flask import db
+
         if cls and id:
             if type(cls) == str:
-                cls = globals()[cls]
+                cls = self.get_class(cls)
             try:
                 obj = cls.query.get(id)
                 if obj:
@@ -233,10 +265,13 @@ class DBStorage:
 
     def get(self, cls, id):
         ''' Retrieves a single object of a class with a given id '''
+        from models.vendor import Vendor
+
         if type(cls) == str:
-            cls = globals()[cls]
+            cls = self.get_class(cls)
 
         if cls and id:
             obj = cls.query.get(id)
             return obj
         return None
+

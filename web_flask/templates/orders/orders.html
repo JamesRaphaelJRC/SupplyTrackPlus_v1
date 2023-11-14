@@ -12,7 +12,7 @@
     </div>
   </div> 
 {% else %}
-<form action="{{ url_for('filter_orders', filter_by='') }}" method="POST">
+<form action="{{ url_for('user_views.filter_orders', filter_by='') }}" method="POST">
   <label for="filters"  class="filters bold">Filter by</label>
   <select class="filters" name="filter_by" onchange="this.form.submit()">
     <option id="empty" value="null">Options</option>
@@ -20,6 +20,7 @@
     <option id="oldest" value="oldest">Oldest</option>
     <option id="by_open" value="open">Open Orders</option>
     <option id="by_closed" value="closed">Closed Orders</option>
+    <option id="vendor" value="vendor">Vendor</option>
   </select>
 </form>
 <section class="table-view" id="orders-table">
@@ -42,7 +43,10 @@
       <tbody>
         <tr id="table-body">
           <td>{{ loop.index }}</td>
-          <td>{{ order.product_name }}</td>
+         
+          <td>
+            <a href="{{ url_for('user_views.view_order', id=order.id )}}">{{ order.product_name }}</a>
+          </td>
           <td>{{ order.description }}</td>
           <td>{{ order.vendor_name }}</td>
           <td>{{ order.quantity }}</td>
@@ -57,13 +61,13 @@
             {% if order.delivery_status == False %}
               <button class="main-btn">action</button>
               <div class="action-btn">
-                  <form action="{{ url_for('edit_order', id=order.id) }}" method="POST"> 
+                  <form action="{{ url_for('user_views.edit_order', id=order.id) }}" method="POST"> 
                     <button class="edit-btn" title="Edit this order" type="submit"></button>
                   </form>
-                  <form action="{{ url_for('orders', id=order.id, filter_by='') }}" method="POST"> 
+                  <form action="{{ url_for('user_views.orders', id=order.id, filter_by='') }}" method="POST"> 
                     <button class="delivered-btn" title="Mark as delivered" type="submit" onclick="return confirm('Do you confirm that to have received this order?')"></button>
                   </form>
-                <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                <form action="{{ url_for('user_views.delete_order', id=order.id) }}" method="POST">
                   <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
                 </form>
               </div>
@@ -73,15 +77,15 @@
               {% if order.reviews|length == 0 %}
                 <button class="main-btn">Review</button>
                 <div class="action-btn">
-                    <form action="{{ url_for('create_review', order_id=order.id, vendor_id=order.vendor_id) }}" method="POST"> 
+                    <form action="{{ url_for('user_views.create_review', order_id=order.id, vendor_id=order.vendor_id) }}" method="POST"> 
                       <button class="review-btn" title="Review this order" type="submit"></button>
                     </form>
-                    <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                    <form action="{{ url_for('user_views.delete_order', id=order.id) }}" method="POST">
                       <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
                     </form>
                 </div>
               {% else %}
-                <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                <form action="{{ url_for('user_views.delete_order', id=order.id) }}" method="POST">
                   <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
                 </form>
               {% endif %}
@@ -94,12 +98,12 @@
     {% for page_num in orders.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
     {% if page_num %}
     {% if filter_by %}
-      <a class="body-font" href="{{ url_for('filter_orders', page=page_num, filter_by=filter_by) }}">{{ page_num }}</a>
+      <a class="body-font" href="{{ url_for('user_views.filter_orders', page=page_num, filter_by=filter_by) }}">{{ page_num }}</a>
     {% else %}
-    <a class="body-font" href="{{ url_for('orders', page=page_num) }}">{{ page_num }}</a>
+    <a class="body-font" href="{{ url_for('user_views.orders', page=page_num) }}">{{ page_num }}</a>
     {% endif %}
       {% if orders.page == page_num %}
-      <a class="body-font" id="current-page" href="{{ url_for('orders', page=page_num)}}">{{ page_num }}</a>
+      <a class="body-font" id="current-page" href="{{ url_for('user_views.orders', page=page_num)}}">{{ page_num }}</a>
       {% endif %}
     {% else %}
       ...
@@ -166,12 +170,12 @@
           [{{ error }}]
         {% endfor %}
       </div>
-
+      <input type="hidden" name="current_pg" value="{{ request.url }}">
       <div>
           {{ form.submit()}}
       </div>
   </form>
-  <a href="{{ url_for('orders') }}">
+  <a href="{{ url_for('user_views.orders') }}">
     <button class="body-font" id="cancel">Cancel</button>
   </a>
 </div>
@@ -230,13 +234,13 @@
             {% if order.delivery_status == False %}
               <button class="main-btn">action</button>
               <div class="action-btn">
-                  <form action="{{ url_for('edit_order', id=order.id) }}" method="POST"> 
+                  <form action="{{ url_for('user_views.edit_order', id=order.id) }}" method="POST"> 
                     <button class="edit-btn" title="Edit this order" type="submit"></button>
                   </form>
-                  <form action="{{ url_for('orders', id=order.id, filter_by='') }}" method="POST"> 
+                  <form action="{{ url_for('user_views.orders', id=order.id, filter_by='') }}" method="POST"> 
                     <button class="delivered-btn" title="Mark as delivered" type="submit" onclick="return confirm('Do you confirm that to have received this order?')"></button>
                   </form>
-                <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                <form action="{{ url_for('user_views.delete_order', id=order.id) }}" method="POST">
                   <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
                 </form>
               </div>
@@ -246,15 +250,15 @@
               {% if order.reviews|length == 0 %}
                 <button class="main-btn">Review</button>
                 <div class="action-btn">
-                    <form action="{{ url_for('create_review', order_id=order.id, vendor_id=order.vendor_id) }}" method="POST"> 
+                    <form action="{{ url_for('user_views.create_review', order_id=order.id, vendor_id=order.vendor_id) }}" method="POST"> 
                       <button class="review-btn" title="Review this order" type="submit"></button>
                     </form>
-                    <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                    <form action="{{ url_for('user_views.delete_order', id=order.id) }}" method="POST">
                       <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
                     </form>
                 </div>
               {% else %}
-                <form action="{{ url_for('delete_order', id=order.id) }}" method="POST">
+                <form action="{{ url_for('user_views.delete_order', id=order.id) }}" method="POST">
                   <button class="delete-btn" title="Delete this order" type="submit" onclick="return confirm('Are you sure you want to delete this order?')"></button>
                 </form>
               {% endif %}
@@ -267,12 +271,12 @@
     {% for page_num in search_results.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
     {% if page_num %}
     {% if filter_by %}
-      <a class="body-font" href="{{ url_for('filter_orders', page=page_num, filter_by=filter_by) }}">{{ page_num }}</a>
+      <a class="body-font" href="{{ url_for('user_views.filter_orders', page=page_num, filter_by=filter_by) }}">{{ page_num }}</a>
     {% else %}
-    <a class="body-font" href="{{ url_for('search', page=page_num) }}">{{ page_num }}</a>
+    <a class="body-font" href="{{ url_for('user_views.search', page=page_num) }}">{{ page_num }}</a>
     {% endif %}
       {% if search_results.page == page_num %}
-      <a class="body-font" id="current-page" href="{{ url_for('search', page=page_num)}}">{{ page_num }}</a>
+      <a class="body-font" id="current-page" href="{{ url_for('user_views.search', page=page_num)}}">{{ page_num }}</a>
       {% endif %}
     {% else %}
       ...

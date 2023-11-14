@@ -1,9 +1,9 @@
-from flask import jsonify
+" No more in use"
 from flask_login import current_user
 from web_flask import app
 from models import storage
 
-@app.route('/user/vendors/<vendor_id>')
+@app.route('/vendors/<vendor_id>')
 def get_vendor(vendor_id):
     ''' Retrieves a vendor '''
     vendor = storage.get('Vendor', vendor_id)

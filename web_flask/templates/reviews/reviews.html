@@ -15,10 +15,10 @@
     {% for review in reviews.items %}
       <div class="review-box">
         <div id="actions">
-          <form action="{{ url_for('edit_review', id=review.id)}}" method="POST">
+          <form action="{{ url_for('user_views.edit_review', id=review.id)}}" method="POST">
             <button class="edit-btn" type="submit"></button>
           </form>
-          <form action="{{ url_for('delete_review', id=review.id) }}" method="POST"> 
+          <form action="{{ url_for('user_views.delete_review', id=review.id) }}" method="POST"> 
             <button class="delete-btn" type="submit" onclick="return confirm('Do you really want to delete this review?')"></button>
           </form>
         </div>
@@ -49,14 +49,14 @@
 </div>
 {% for page_num in reviews.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
   {% if page_num %}
-    <a class="body-font" href="{{ url_for('reviews', page=page_num) }}">{{ page_num }}</a>
+    <a class="body-font" href="{{ url_for('user_views.reviews', page=page_num) }}">{{ page_num }}</a>
     {% if reviews.page == page_num %}
-    <a class="body-font" id="current-page" href="{{ url_for('reviews', page=page_num) }}">{{ page_num }}</a>
+    <a class="body-font" id="current-page" href="{{ url_for('user_views.reviews', page=page_num) }}">{{ page_num }}</a>
     {% endif %}
   {% else %}
   ...
   {% endif %}
-  {% endfor %}
+{% endfor %}
 {% endif %}
 {% endif %}
 
@@ -97,7 +97,7 @@
           {{ form.submit()}}
       </div>
   </form>
-  <a href="{{ url_for('reviews') }}">
+  <a href="{{ url_for('user_views.reviews') }}">
     <button class="body-font" id="cancel">Cancel</button>
   </a>
 </div>

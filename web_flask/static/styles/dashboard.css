@@ -25,7 +25,7 @@
     left: 25%;
     /* justify-content: flex-start; */
     align-items: flex-start;
-    gap: 19.44px;
+    gap: 5%;
     display: inline-flex;
     height: 100%;
     /* background-color: #213159; */
@@ -40,12 +40,12 @@
     /* background: rgb(46, 156, 204, 0.3); */
     max-width: 100%;
     min-width: 10%;
-    padding: 20px;
+    padding: 3%;
     /* box-shadow: 0px 1.9444444179534912px 10px rgba(128, 128, 128, 0.3); */
-    border-radius: 23.33px;
+    border-radius: 20%;
     flex-direction: column;
     align-items: center;
-    gap: 7px;
+    /* gap: 2%; */
     display: inline-flex;
     margin-top: 7%;
 }
@@ -53,41 +53,42 @@
 /* Style for the inner widget box housing the icon box, description and value */
 .innerbox {
     /* border: 1px solid yellow; */
-    height: 85.89px;
+    height: 80%;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 15.56px;
+    gap: 10%;
     display: flex;
 }
 
 .icon-and-name {
     /* border: 1px solid blue; */
     align-items: center;
-    gap: 7.78px;
+    gap: 5%;
     display: inline-flex;
 }
 
 .icon {
     /* border: 1px solid black; */
     height: 25px;
-    width: 25px;
-    padding: 3.89px;
-    border-radius: 7.78px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 9.72px;
-    display: flex;
+    width: 20%;
+    /* padding: 3.89px; */
+    /* border-radius: 7.78px; */
+    /* justify-content: flex-start; */
+    /* align-items: flex-start; */
+    /* gap: 9.72px; */
+    /* display: flex; */
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 .name {
     color: #808191;
-    font-size: 15px;
+    /* font-size: 15px; */
     font-family: Inter;
     font-weight: 800;
-    line-height: 19.44px;
+    line-height: 100%;
     word-wrap: break-word;
 }
 
@@ -106,8 +107,15 @@
 .value {
     /* border: 1px solid black; */
     color: #1B1D21;
-    font-size: 31.11px;
+    font-size: 31px;
     font-family: Poppins;
     font-weight: 500;
     word-wrap: break-word;
 }
+
+@media only screen and (max-width: 600px) {
+    .value {
+        font-size: 1.8em;
+    }
+}
+
