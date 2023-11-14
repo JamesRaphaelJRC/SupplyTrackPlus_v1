@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#vendor_id').change(function () {
         var vendorId = $(this).val();
         $.ajax({
-            url: '/get_orders/' + vendorId,
+            url: '/user/orders/get_orders/' + vendorId,
             type: 'GET',
             success: function(response){
                 // Populate order options based on the response

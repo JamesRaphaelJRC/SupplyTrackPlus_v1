@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="grouped-container">
+  <form action="{{ url_for('user_views.filter_orders', filter_by='') }}" method="POST">
+    <label for="filters"  class="filters bold">Filter by</label>
+      <select class="filters" name="filter_by" onchange="this.form.submit()">
+        <option id="empty" value="null">Options</option>
+        <option id="latest" value="latest">Latest</option>
+        <option id="oldest" value="oldest">Oldest</option>
+        <option id="by_open" value="open">Open Orders</option>
+        <option id="by_closed" value="closed">Closed Orders</option>
+        <option id="vendor" value="vendor">Vendor</option>
+      </select>
+    </form>
+    <h3>&nbsp;Grouped Orders according to vendors</h3>
+  {% if grouped_orders %}
+      {% for name, orders in grouped_orders.items() %}
+      <li>
+          <select class="grouped-orders">
+              <option><strong>&nbsp;{{ name }}   ({{ orders|length }})</strong></option>
+              {% for order in orders %}
+              <option>&nbsp;{{ order.product_name }}</option>
+              {% endfor %}
+          </select>
+      </li>
+      {% endfor %}
+
+  {% endif %}
+</div>
+{% endblock %}

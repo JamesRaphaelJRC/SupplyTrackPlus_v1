@@ -1,0 +1,90 @@
+.grouped-container {
+    /* border: 1px solid black; */
+    height: min(79%);
+}
+.grouped-orders {
+    /* border: 1px solid red; */
+    /* margin: 1px; */
+    width: 70%;
+    height: 30px;
+    border-radius: 0;
+    font-weight: 500;
+}
+
+.grouped-container#view_order {
+    border: 2px solid  rgb(33, 49, 89,0.5);
+    border-left: 0;
+    border-right: 0;
+    margin: 1% 5% 0 1%;
+    width: 90%;
+}
+
+.grouped-container#view_order h3 {
+    margin-bottom: 0;
+}
+
+.order-view-cont {
+    /* height: 50%; */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20%;
+}
+
+#view_order .left #name {
+    margin-left: 15px;
+}
+
+#view_order .left #desc {
+    margin-left: 35px;
+}
+
+#view_order .left #status {
+    margin-left: 1px;
+}
+
+#view_order .right #vend{
+    margin-left: 45px;
+}
+
+#view_order .right #date{
+    margin-left: 5px;
+}
+
+#view_order .stats {
+    border-top: 1px solid rgb(128, 128, 128, 0.5);
+}
+
+#view_order .stats #qty {
+    margin-left: 52px;;
+}
+
+#view_order .stats #unit-cost {
+    margin-left: 20px;;
+}
+
+#view_order .stats #upline {
+    margin-left: 100px;;
+    border-top: 2px solid black;
+}
+
+#view_order .stats #tot-cost {
+    margin-top: 0;
+    padding: 0;
+    margin-left: 40px;;
+}
+
+#liner {
+    /* border: 1px solid blue; */
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+p#tot {
+    margin: 0;
+}
+
+#view-order-opt {
+    float: right;
+}

@@ -14,6 +14,7 @@
      <link rel="stylesheet" href="{{ url_for('static', filename='styles/vendors.css')}}">
      <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard.css')}}">
      <link rel="stylesheet" href="{{ url_for('static', filename='styles/reviews.css')}}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles/orders.css')}}">
    
      <!-- Links to jquery library and javascript file-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -25,25 +26,25 @@
         <button id="drawer-btn"></button>
         <div id="logo"></div>
         <div class="head-nav-container">
-            <a href="{{ url_for('dashboard')}}"><div class="nav" id="nav-dashboard">
+            <a href="{{ url_for('user_views.dashboard')}}"><div class="nav" id="nav-dashboard">
               Dashboard<br>
               {% if page == 'Dashboard' %}
                 <div id="indicator"></div>
               {% endif %}
             </div></a>
-            <a href="{{ url_for('vendors')}}"><div class="nav" id="nav-vendors">
+            <a href="{{ url_for('user_views.vendors')}}"><div class="nav" id="nav-vendors">
               Vendors<br>
               {% if page == 'Vendors' %}
                 <div id="indicator"></div>
               {% endif %}
             </div></a>
-            <a href="{{ url_for('orders', filter_by='latest')}}"><div class="nav" id="nav-orders">
+            <a href="{{ url_for('user_views.orders', filter_by='latest')}}"><div class="nav" id="nav-orders">
               Orders<br>
               {% if page == 'Orders' %}
                 <div id="indicator"></div>
               {% endif %}
             </div></a>
-            <a href="{{ url_for('reviews')}}"><div class="nav" id="nav-review">
+            <a href="{{ url_for('user_views.reviews')}}"><div class="nav" id="nav-review">
               Reviews<br>
               {% if page == 'Reviews' %}
                 <div id="indicator"></div>
@@ -54,14 +55,14 @@
             {% if user %}
             <div id="username">@{{ user.first_name }} {{ user.last_name }}</div>
             {% endif %}
-            <a href="{{ url_for('logout')}}"><div id="avatar">logout</div></a>
+            <a href="{{ url_for('user_views.logout')}}"><div id="avatar">logout</div></a>
         </div>
     </header>
 
         <!-- The sidepanel structure -->
     <section class="drawer">
         <div class="views-container">
-          <a href="{{ url_for('dashboard') }}">
+          <a href="{{ url_for('user_views.dashboard') }}">
             <div class="view-box">
                 <div class="icon-box" id="dashboard"></div>
                 <div class="name-box" id="dashboard"><h5>Dashboard</h5></div>
@@ -70,7 +71,7 @@
                 {% endif %}
             </div>
           </a>
-          <a href="{{ url_for('vendors') }}">
+          <a href="{{ url_for('user_views.vendors') }}">
             <div class="view-box" id="vendors">
               <div class="icon-box" id="vendors"></div>
               <div class="name-box" id="vendors"><h5>Vendors</h5></div>
@@ -79,7 +80,7 @@
               {% endif %}
             </div>
           </a>
-          <a href="{{ url_for('orders', filter_by='latest') }}">
+          <a href="{{ url_for('user_views.orders', filter_by='latest') }}">
             <div class="view-box" id="orders">
               <div class="icon-box" id="orders"></div>
               <div class="name-box" id="orders"><h5>Orders</h5></div>
@@ -88,7 +89,7 @@
               {% endif %}
             </div>
           </a>
-          <a href="{{ url_for('reviews') }}">
+          <a href="{{ url_for('user_views.reviews') }}">
             <div class="view-box" id="reviews">
               <div class="icon-box" id="reviews"></div>
               <div class="name-box" id="reviews"><h5>Reviews</h5></div>
@@ -98,7 +99,7 @@
             </div>
           </a>
         </div>
-        <a href="{{ url_for('logout') }}">
+        <a href="{{ url_for('user_views.logout') }}">
           <div class="view-box" id="logout">
             <div class="icon-box" id="logout"></div>
             <div class="name-box" id="logout"><h5>Logout</h5></div>
@@ -111,13 +112,13 @@
             <div id="page-name">{{ page }}</div>
           {% endif %}
           {% if page == 'Vendors' %}
-            <a  class="new-obj" title="Create new vendor" href="{{ url_for('create_vendor')}}"><button class="new-obj">NEW</button></a>
+            <a  class="new-obj" title="Create new vendor" href="{{ url_for('user_views.create_vendor')}}"><button class="new-obj">NEW</button></a>
           {% endif %}
           {% if page == 'Orders' %}
-          <a  class="new-obj" title="Create new order" href="{{ url_for('create_order')}}"><button class="new-obj">NEW</button></a>
+          <a  class="new-obj" title="Create new order" href="{{ url_for('user_views.create_order')}}"><button class="new-obj">NEW</button></a>
         {% endif %}
         {% if page == 'Reviews' %}
-        <a  class="new-obj" title="Review an order" href="{{ url_for('create_review')}}"><button class="new-obj">NEW</button></a>
+        <a  class="new-obj" title="Review an order" href="{{ url_for('user_views.create_review')}}"><button class="new-obj">NEW</button></a>
       {% endif %}
         </div>
         {% if page == 'Vendors' %}
@@ -133,7 +134,7 @@
         </div>
         {% endif %}
         {% endwith %}
-        <form id="search-input" action="{{ url_for('search') }}" method="POST">
+        <form id="search-input" action="{{ url_for('user_views.search') }}" method="POST">
           {{ searchform.hidden_tag() }}
           <div class="search-bar">
               <input id="search-box" name="searched" placeholder="Search..."><span><button id="search-btn" type="submit"></button></span>
