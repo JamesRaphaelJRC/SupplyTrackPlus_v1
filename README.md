@@ -2,4 +2,4 @@
 ALX-SE End of Foundations Portfolio Project (Cohort 12)
 
 ## Introduction:
-[SupplyTrackPlus] (https://supplytrackplus.me) is a web-based vendor/supply chain management application that enables users register their vendors, create orders designated to a registered vendor and keep track of delivered and undelivered orders/goods and much more. This application is suitble for small to large scale companies with some form of transactions with a third party supplier.
+[SupplyTrackPlus](https://supplytrackplus.me) is a web-based vendor/supply chain management application that enables users register their vendors, create orders designated to a registered vendor and keep track of delivered and undelivered orders/goods and much more. This application is suitble for small to large scale companies with some form of transactions with a third party supplier.
