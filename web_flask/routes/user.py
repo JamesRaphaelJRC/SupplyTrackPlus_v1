@@ -10,7 +10,6 @@ from models import storage
 def logout():
     ''' Handles user logout '''
     logout_user()
-    # flash("Successfully logged out")
     return redirect(url_for('pub_views.landing_page'))
 
 
@@ -18,10 +17,9 @@ def logout():
 @login_required
 def dashboard():
     ''' Returns the user's dashboard page '''
-    # flash('Welcome {}'.format(current_user.username))
     username = current_user.username
-    tot_vendors = len(storage.all( username, 'Vendor'))
-    tot_orders = len(storage.all( username, 'Order'))
+    tot_vendors = len(storage.all(username, 'Vendor'))
+    tot_orders = len(storage.all(username, 'Order'))
     tot_reviews = len(storage.all(username, 'Review'))
     return render_template('/dashboard/dashboard.html', page="Dashboard",
                            tot_vendors=tot_vendors, tot_orders=tot_orders,
@@ -38,15 +36,18 @@ def search():
     page = request.args.get('page', 1, type=int)
     per_page = 12
     username = current_user.username
+
+    # Processes search when form is submitted or after submission and user
+    # clicks on the next page (pagination) to view other search results
     if form.validate_on_submit() or request.method == 'GET':
         if request.method == 'GET':
-            # retrieves temp stored word and option for pagination
+            # retrieves temporarily stored 'word' and 'option' for pagination
             word = storage.word
             option = storage.option
         else:
             word = form.searched.data
             option = form.option.data
-            # saves searched word-'word' and class-'option' temporarily
+            # saves searched word 'word' and Class 'option' temporarily
             storage.word = word
             storage.option = option
         search_results = storage.do_search(word, option, username,\
@@ -59,8 +60,9 @@ def search():
             return render_template('/orders/orders.html',\
                 search_results=search_results, page='Orders')
 
-    # Retrieves and redirect to the page user searched from
+    # Retrieves the page user searched from
     current_page = request.form.get('current_pg', '/')
+
     if not form.searched.data:
         flash('Search word missing')
     if not form.option.data:

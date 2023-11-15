@@ -7,7 +7,6 @@ from models import storage
 from web_flask.routes import pub_views
 
 
-
 @pub_views.route('/')
 def landing_page():
     ''' Returns the landing/welcome page '''
@@ -49,13 +48,16 @@ def login():
 
             # Creates a login session for the validated user
             login_user(user, remember=form.remember_me.data)
-            # flash('Login successful!')
+
+            # Retrieves the page in cases where user tries to access a
+            # previously visited page after logging out
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for("user_views.dashboard")
             return redirect(next_page)
+
         flash('Incorrect Username or Password')
-        
         # Prevents re-submission during page refresh
         return redirect(url_for('pub_views.login'))
+
     return render_template('login.html', form=form)

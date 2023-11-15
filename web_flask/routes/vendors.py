@@ -5,16 +5,21 @@ from models import storage
 from models.forms import VendorForm
 from web_flask.routes import user_views
 
+
 @user_views.route('/vendors')
 @login_required
 def vendors():
-    ''' Retrieves all vendors of the current user to vendors.html template '''
-    # user_id = current_user.get_id()
+    ''' Retrieves all vendors of the current user 
+
+        Return: vendors.html page with user's vendors
+    '''
     page = request.args.get('page', 1, type=int)
     per_page = 12
     username = current_user.username
+
     pag_vendors = storage.do_paginate('Vendor', page, per_page, username)
-    return render_template('/vendors/vendors.html', vendors=pag_vendors, page='Vendors')
+    return render_template('/vendors/vendors.html', vendors=pag_vendors,\
+                           page='Vendors')
 
 
 @user_views.route('/vendors/new', methods=['GET', 'POST'])
@@ -25,23 +30,28 @@ def create_vendor():
 
     # Pass current user's username to the form instance for validation
     form.current_user_username = current_user.username
+
     if form.validate_on_submit():
         vendor = storage.create_vendor(
             form.name.data, form.email.data, form.phone_number.data,
             form.address.data, str(current_user.get_id()))
+
         storage.new(vendor)
         storage.save()
         return redirect(url_for('user_views.vendors'))
-    return render_template('/vendors/vendors.html', form=form, page='New Vendor')
+
+    return render_template('/vendors/vendors.html', form=form,\
+                           page='New Vendor')
 
 
 @user_views.route('/vendors/<string:id>/view')
 @login_required
 def view_vendor(id):
-    ''' Returns the view page of the selected vendor '''
+    ''' Returns the view page of the user selected vendor '''
     username = current_user.username
     vendor = storage.get('Vendor', id)
     vendor_avr_review = storage.get_average_reviews(username, id)
+
     return render_template('/vendors/vendors.html', selected_vendor=vendor,\
                            page='Vendors', avr_review=vendor_avr_review)
 
@@ -49,7 +59,7 @@ def view_vendor(id):
 @user_views.route('/vendors/<string:id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_vendor(id):
-    ''' Edit and updates an already existing vendor '''
+    ''' Edits and updates an already existing vendor '''
     vendor = storage.get('Vendor', id)
     old_name = vendor.name
     old_email = vendor.email
@@ -62,10 +72,12 @@ def edit_vendor(id):
     form.old_vendor_name = old_name
     form.old_vendor_email = old_email
     form.current_user_username = current_user.username
+
     if form.validate_on_submit():
         form.populate_obj(vendor)
         storage.save()
         return redirect(url_for('user_views.vendors'))
+
     return render_template('/vendors/vendors.html', form=form)
 
 
@@ -80,8 +92,8 @@ def delete_vendor(id):
 @user_views.route('/vendors/<vendor_id>')
 def get_vendor(vendor_id):
     ''' Retrieves a vendor and returns a dictionary/json format
-        of the Vendor object (used by the JQuery to dynamically load
-        preview information about the selected vendor in the vendor table)
+        of a Vendor object (used by the JQuery to dynamically load
+        preview section for a selected vendor in the vendor table)
     '''
     vendor = storage.get('Vendor', vendor_id)
     last_order = vendor.last_order
@@ -93,6 +105,7 @@ def get_vendor(vendor_id):
     vendor_dict.update({'total_orders': total_orders})
     vendor_dict.update({'open_orders': open_orders})
     vendor_dict.update({'closed_orders': closed_orders})
+
     # Remove the unserializable orders of type Object
     del vendor_dict['orders']
 

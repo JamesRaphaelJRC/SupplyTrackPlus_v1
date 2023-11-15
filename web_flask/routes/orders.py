@@ -6,14 +6,18 @@ from models import storage
 from models.forms import OrderForm
 from web_flask.routes import user_views
 
+
 @user_views.route('/orders', methods=['GET', 'POST'])
 @login_required
 def orders():
-    ''' Handles order operations '''
+    ''' Retrives all user orders.
+    
+        Return: orders.html template with user's orders
+    '''
     # Gets and save current page to user session for easy redirection
     session['history'] = session.get('history', [])
     session['history'].append(request.url)
-    
+
     if request.method == 'GET':
         page = request.args.get('page', 1, type=int)
         per_page = 12
@@ -21,10 +25,10 @@ def orders():
         pag_orders = storage.do_paginate('Order', page, per_page, username)
         return render_template('/orders/orders.html', orders=pag_orders,
                             page='Orders')
+
     if request.method == 'POST':
-        ''' Processes marking order as reveived '''
+        ''' Processes marking an order as reveived by a user '''
         order_id  = request.args.get('id')
-        print(order_id)
         order = storage.get('Order', str(order_id))
         order.delivery_status = True
         storage.save()
@@ -34,7 +38,8 @@ def orders():
 @user_views.route('/orders/<string:id>/view')
 @login_required
 def view_order(id):
-    ''' Returns the html page for a single order '''
+    ''' Returns the html template for a single user selected order '''
+
     # Gets and save current page to user session for easy redirection
     session['history'] = session.get('history', [])
     session['history'].append(request.url)
@@ -47,15 +52,16 @@ def view_order(id):
 @user_views.route('/orders/filter_by/', methods=['GET', 'POST'])
 @login_required
 def filter_orders():
-    ''' Returns user Order objects based on filter word '''
+    ''' Returns a user Order objects based on filter word '''
     if request.method == 'POST':
         filter_by = request.form.get('filter_by')
+
+    # For request coming from the next_page pagination link in orders.html
     if request.method == 'GET':
-        # For request coming from the next_page pagination link in orders.html
         filter_by = request.args.get('filter_by')
 
+    # Group orders according to their vendors
     if filter_by == 'vendor':
-        # Group orders according to their vendors
         username = current_user.username
         vendors = storage.all(username, 'Vendor')
         orders = storage.all(username, 'Order')
@@ -68,7 +74,7 @@ def filter_orders():
                     grouped_orders[vendor.name].append(order)
         return render_template('orders/grouped_orders.html', page='Orders',
                                grouped_orders=grouped_orders)
-    
+
     page = request.args.get('page', 1, type=int)
     per_page = 12
     username = current_user.username
@@ -80,7 +86,7 @@ def filter_orders():
 
 @user_views.route('/orders/get_orders/<vendor_id>')
 def get_orders(vendor_id):
-    ''' Returns the Orders of a given vendor for a given user '''
+    ''' Returns the Orders of a given vendor for the current user '''
     orders = [(o.id, o.product_name) for o in storage.all(\
         current_user.username, 'Order').values() if o.vendor_id == vendor_id\
             and o.delivery_status == True]
@@ -104,6 +110,7 @@ def create_order():
 
             # Return the orders.html page with the form bearing previous inputs
             return render_template('orders.html', form=form)
+
         order = storage.create_order(
             form.product_name.data, form.description.data, form.quantity.data,
             form.unit.data, form.unit_cost.data, form.delivery_status.data,
@@ -112,6 +119,7 @@ def create_order():
         storage.new(order)
         storage.save()
         return redirect(url_for('user_views.orders'))
+
     return render_template('/orders/orders.html', form=form, page='Orders')
 
 
@@ -136,10 +144,12 @@ def edit_order(id):
             return render_template('orders.html', form=form, page='Orders')
         form.populate_obj(order)
         storage.save()
-        # return redirect(url_for('user_views.orders'))
+
+        # Gets the page user processed edit from and redirects back to it
         prev_page = session.get('history')
         prev_page = prev_page[-1]
         return redirect(prev_page)
+
     return render_template('/orders/orders.html', form=form, page='Orders')
 
 

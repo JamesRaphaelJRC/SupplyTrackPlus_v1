@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 
 class Vendor(BaseModel, db.Model):
-    ''' Define table for Vendor instances'''
+    ''' Defines table for Vendor instances'''
     name = db.Column(db.String(120), index=True, nullable=False)
     email =  db.Column(db.String(120), index=True)
     phone_number = db.Column(db.String(20))
@@ -20,7 +20,7 @@ class Vendor(BaseModel, db.Model):
     def open_orders(self):
         ''' Returns the number of open/undelivered orders for a vendor '''
         return sum(1 for order in self.orders if not order.delivery_status)
-    
+
 
     @hybrid_property
     def last_order(self):

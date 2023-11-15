@@ -15,4 +15,3 @@ def base():
         return dict(searchform=searchform, user=user)
     else:
         return dict(searchform=searchform)
-    
