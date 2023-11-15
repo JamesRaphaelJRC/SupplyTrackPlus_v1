@@ -23,4 +23,4 @@ Once the dependencies have been installed successfully, serve this app on your l
 `python3 supplyTrackPlus.py`
 
 ## License:
-SupplyTrackPlus is licensed under the [MIT license](https://
+SupplyTrackPlus is licensed under the [MIT license](https://github.com/JamesRaphaelJRC/SupplyTrackPlus_v1/blob/main/LICENSE)
