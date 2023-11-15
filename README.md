@@ -12,10 +12,15 @@ ALX-SE End of Foundations Portfolio Project (Cohort 12)
 `cd SupplyTrackPlus_v1`
 
 3. Create and activate a python virtual environment
-`python -m venv venv`
+`python -m venv venv` then run
 `source venv/bin/activate` 
 
 4. Install the dependencies:
-   `pip3 -r requirements.txt`
+   `pip3 install -r requirements.txt`
 
-Next, install the dependencies in the requirements.txt
+## Usage
+Once the dependencies have been installed successfully, serve this app on your localhost using:
+`python3 supplyTrackPlus.py`
+
+## License:
+SupplyTrackPlus is licensed under the [MIT license](https://
