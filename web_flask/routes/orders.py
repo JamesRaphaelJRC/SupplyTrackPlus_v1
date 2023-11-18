@@ -35,12 +35,27 @@ def orders():
         return redirect(url_for('user_views.orders'))
 
 
+@user_views.route('/orders/<display>')
+@login_required
+def view_orders(display):
+    ''' Returns the view_orders.html template
+    
+        display: The information to pass to the template.
+            e.g. if display == 'unreviewed', this value is passed to the 
+            template and unreviewed orders are displayed
+    '''
+    # Gets history and save current page to user session for easy redirection
+    session['history'] = session.get('history', [])
+    session['history'].append(request.url)
+
+    return render_template('/orders/view_orders.html', display=display,
+                           page='Orders')
+
 @user_views.route('/orders/<string:id>/view')
 @login_required
 def view_order(id):
     ''' Returns the html template for a single user selected order '''
-
-    # Gets and save current page to user session for easy redirection
+    # Gets history and save current page to user session for easy redirection
     session['history'] = session.get('history', [])
     session['history'].append(request.url)
 
@@ -53,6 +68,10 @@ def view_order(id):
 @login_required
 def filter_orders():
     ''' Returns a user Order objects based on filter word '''
+    # Gets history and save current page to user session for easy redirection
+    session['history'] = session.get('history', [])
+    session['history'].append(request.url)
+
     if request.method == 'POST':
         filter_by = request.form.get('filter_by')
 
@@ -87,11 +106,23 @@ def filter_orders():
 @user_views.route('/orders/get_orders/<vendor_id>')
 def get_orders(vendor_id):
     ''' Returns the Orders of a given vendor for the current user '''
+    # Gets history and save current page to user session for easy redirection
+    session['history'] = session.get('history', [])
+    session['history'].append(request.url)
+
     orders = [(o.id, o.product_name) for o in storage.all(\
         current_user.username, 'Order').values() if o.vendor_id == vendor_id\
             and o.delivery_status == True]
     return jsonify(orders)
 
+
+@user_views.route('/orders/unreviewed/<vendor_id>')
+def get_unreviewed_orders(vendor_id):
+    ''' Returns orders of a given vendor which have not been reviewed '''
+    orders = [(o.id, o.product_name) for o in storage.all(\
+    current_user.username, 'Order').values() if o.vendor_id == vendor_id\
+        and o.delivery_status == True and not o.reviews]
+    return jsonify(orders)
 
 @user_views.route('/orders/new', methods=['GET', 'POST'])
 @login_required

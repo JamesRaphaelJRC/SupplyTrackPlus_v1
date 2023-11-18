@@ -221,6 +221,62 @@ class DBStorage:
             avr_review = 0
         return avr_review
 
+    def fetch_statistics(self, username):
+        ''' Computes and returns statistics of a given user operation
+        
+            Return:
+            A dictionar of dictionaries containing lists of corresponding
+            items
+            e.g. {
+                    'orders': {
+                        'last 7 days': [order objects with timestamp <= 7 days],
+                        'this month': [order objects created this month]
+                    },
+                    'reviews': {
+                        'key1': [orders with matching values1],
+                        'key2: [orders with matching values2]
+                    }
+            }
+        '''
+        from datetime import datetime
+
+        stats = {}
+        now = datetime.now()
+
+        # Gets current statistics for orders
+        stats['orders'] = {}
+        orders_within_24hrs = [order for order in self.all(username, 'Order').\
+                               values() if (now - order.created_at).days <= 1]
+
+        last_7_days_orders = [order for order in self.all(username, 'Order').\
+                              values() if (now - order.created_at).days <= 7]
+
+        current_month_orders = [ order for order in self.all\
+                    (username, 'Order').values() if\
+                    (now.month - order.created_at.month) == 0]
+
+        closed_orders = [order for order in self.all(username, 'Order').\
+                         values() if order.delivery_status == True]
+
+        open_orders = [order for order in self.all(username, 'Order').\
+                       values() if order.delivery_status == False]
+
+        # Only closed orders are considered since only closed orders can be
+        # reviewed
+        reviewed = [order for order in closed_orders if order.reviews]
+
+        unreviewed = [order for order in closed_orders if not order.reviews]
+
+        # Sets the statistics in the orders dictionary
+        stats['orders']['24 hours'] = orders_within_24hrs
+        stats['orders']['7 days'] = last_7_days_orders
+        stats['orders']['this month'] = current_month_orders
+        stats['orders']['closed orders'] = closed_orders
+        stats['orders']['open orders'] = open_orders
+        stats['orders']['reviewed'] = reviewed
+        stats['orders']['unreviewed'] = unreviewed
+
+        return stats
 
     def new(self, obj):
         ''' Adds an object to the current database session '''

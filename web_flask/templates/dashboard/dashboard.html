@@ -1,7 +1,55 @@
 {% extends 'base.html' %}
 {% block main %}
 <section class="display-container">
-        <div class="stat-container"></div>
+
+    <!-- Statistics section -->
+        <div class="stat-container">
+            <div class="caption name">
+                Updates
+            </div>
+            <div class="note-container">
+                <h4 class="note-title">Recent/General Events</h4>
+                <p class="note-content">
+                    {% if stats['orders']['24 hours'] | length > 0 %}
+                        You have created <strong>{{ stats['orders']['24 hours'] | length}} </strong>order(s) in the last 24 hours<br>
+                    {% endif %}
+                    {% if stats['orders']['unreviewed'] | length > 0 %}
+                        <strong>{{ stats['orders']['unreviewed'] | length}}</strong> order(s) await your review;
+                        <a href="{{ url_for('user_views.view_orders', display='unreviewed')}}">review now</a><br>
+                    {% endif %}
+                    {% if stats['orders']['open orders'] | length > 0 %}
+                    You have <strong>{{ stats['orders']['open orders'] | length}}</strong> open order(s)
+                    <a href="{{ url_for('user_views.view_orders', display='open_orders')}}">view</a><br>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="note-container">
+                <h4 class="note-title">Weekly Updates</h4>
+                <p class="note-content">
+                    {% if stats['orders']['7 days'] | length > 0 %}
+                        {% if stats['orders']['7 days'] | length == 1 %}
+                            You have created only <strong>{{ stats['orders']['7 days'] | length}}</strong> order in the last 7 days
+                        {% else %}
+                            You have created <strong>{{ stats['orders']['7 days'] | length}}</strong> orders in the last 7 days
+                        {% endif %}
+                        <a href="{{ url_for('user_views.view_orders', display='last_7_days')}}">view</a><br>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="note-container">
+                <h4 class="note-title">Monthly Statistics</h4>
+                <p class="note-content">
+                    {% if stats['orders']['this month'] | length > 0 %}
+                        {% if stats['orders']['this month'] | length == 1 %}
+                            You have created only <strong>{{ stats['orders']['this month'] | length}}</strong> order this month!
+                        {% else %}
+                            You have created <strong>{{ stats['orders']['this month'] | length}}</strong> orders this month!
+                        {% endif %}
+                        <a href="{{ url_for('user_views.view_orders', display='this_month')}}">See all</a><br>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
         <!-- Widgets structure -->
         <div class="widgets">
             <!-- Vendors widget structure-->

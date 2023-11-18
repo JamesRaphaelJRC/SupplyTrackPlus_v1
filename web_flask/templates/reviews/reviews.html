@@ -95,7 +95,7 @@
           {{ form.submit()}}
       </div>
   </form>
-  <a href="{{ url_for('user_views.reviews') }}">
+  <a href="{{ session.get('history')[-1] }}">
     <button class="body-font" id="cancel">Cancel</button>
   </a>
 </div>

@@ -11,7 +11,9 @@ def base():
 
     # Avoid passing user obj to public pages e.g. login, signup and index pages
     if current_user.is_authenticated:
-        user = storage.get_user(current_user.username)
-        return dict(searchform=searchform, user=user)
+        username = current_user.username
+        user = storage.get_user(username)
+        stats = storage.fetch_statistics(username)
+        return dict(searchform=searchform, user=user, stats=stats)
     else:
         return dict(searchform=searchform)

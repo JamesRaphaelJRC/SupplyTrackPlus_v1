@@ -12,7 +12,7 @@ class BaseModel():
     def __init__(self, **kwargs):
         ''' Instantiation of a new BaseModel object'''
         self.id = str(uuid4())
-        self.created_at = datetime.utcnow()
+        self.created_at = datetime.now()
 
         if kwargs:
             try:

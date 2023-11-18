@@ -11,24 +11,14 @@
     justify-content: flex-start;
 }
 
-.stat-container {
-    /* border: 1px solid blue; */
-    height: 85vh;
-    width: 35%;
-    /* border-right: 2px solid gray; */
-    background-color: rgb(41, 99, 137, 0.1);
-}
-
 .widgets {
     /* border: 1px solid brown; */
     width: 65%;
     left: 25%;
-    /* justify-content: flex-start; */
     align-items: flex-start;
     gap: 5%;
     display: inline-flex;
     height: 100%;
-    /* background-color: #213159; */
 
 }
 
@@ -37,15 +27,12 @@
     flex: 1 1 0;
     /* width: 200px; */
     background-color: rgb(219, 215, 215, 0.3);
-    /* background: rgb(46, 156, 204, 0.3); */
     max-width: 100%;
     min-width: 10%;
     padding: 3%;
-    /* box-shadow: 0px 1.9444444179534912px 10px rgba(128, 128, 128, 0.3); */
     border-radius: 20%;
     flex-direction: column;
     align-items: center;
-    /* gap: 2%; */
     display: inline-flex;
     margin-top: 7%;
 }
@@ -71,14 +58,8 @@
 .icon {
     /* border: 1px solid black; */
     height: 25px;
-    width: 20%;
-    /* padding: 3.89px; */
-    /* border-radius: 7.78px; */
-    /* justify-content: flex-start; */
-    /* align-items: flex-start; */
-    /* gap: 9.72px; */
-    /* display: flex; */
-    background-size: contain;
+    width: 30px;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -117,5 +98,51 @@
     .value {
         font-size: 1.8em;
     }
+}
+
+/*
+    =========================
+    Statistics section styles
+    =========================
+*/
+.stat-container {
+    /* border: 1px solid blue; */
+    height: 85vh;
+    width: 35%;
+    background-color: rgb(41, 99, 137, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.caption {
+    border: 1px solid #f04b4c;
+    color: white;
+    background-color: #f04b4c;
+    margin-top: 5%;
+    padding: 2%;
+    font-weight: 800;
+}
+
+.note-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding:3%;
+    width:70%;
+    max-width: 100%;
+    text-align: left;
+  }
+
+.note-title {
+    color: #333;
+    margin: 0;
+}
+  
+.note-content {
+    color: #555;
+    line-height: 1.5;
+    margin: 1%;
+    font-size: 13px;
 }
 
