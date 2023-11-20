@@ -24,7 +24,8 @@
         <div class="data-sect">
           <div id="vendor-avatar"></div>
           <div class="order-info">
-            <strong>Product: </strong> {{ review.product_name }} <strong>Vendor: </strong> {{ review.vendor_name }}<br>
+            <strong style="color: white;">Product: </strong> {{ review.product_name }}<br>
+            <strong style="color: white;">Vendor: </strong> {{ review.vendor_name }}<br>
             {{ review.created_at.strftime('%d-%m-%Y') }} {{ review.created_at.strftime('%H:%M') }}
           </div>
         </div>
