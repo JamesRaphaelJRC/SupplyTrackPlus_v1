@@ -469,7 +469,7 @@ tr#table-body:hover {
 .review-btn {
     width: 20px;
     height: 20px;
-    background-image: url('../images/review-16.');
+    background-image: url('../images/review-16.png');
     background-size: cover;
     background-repeat: no-repeat;
 }
