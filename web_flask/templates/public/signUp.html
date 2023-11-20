@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp-SupplyTrackPlus</title>
+    <title>Login-SupplyTrackPlus</title>
+    
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/browser.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/accounts.css') }}">
 </head>
-<body id="accounts">
-    <div class="background-frame">
-        <div class="left-box">
-            <div class="logo" id="accounts"></div>
-            <div class="write-up">...Stay in touch with your suppliers</div>
-        </div>
-        <div class="messages">
+<body>
+    <div class="container">
+        <a  href="{{ url_for('pub_views.landing_page') }}"><div id="logo-signup"></div></a>
+        <div class="messages" id="signup">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             <ul>
@@ -24,52 +22,59 @@
             {% endif %}
             {% endwith %}
         </div>
-        <div class="signup-container">
+        <div class="login-container signup">
             <p class="text">Sign<span id="come">Up</span></p>
-            <div class="form-container">
+            <p id="instr">Kindly fill the form below and submit; to register</p>
+            <div class="form-container" id="signup">
                 <form action="" method="POST" novalidate>
                     {{ form.hidden_tag() }}
-                    <div class="input-box" id="signup">
-                        {{ form.first_name.label }}<br>
-                        {{ form.first_name(size=25) }}
-                        {% for error in form.first_name.errors %}
-                        <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
-                        {% endfor %}
+                    <div class="row">
+                        <div class="input-box" id="signup">
+                            {{ form.first_name.label }}<br>
+                            {{ form.first_name(size=25) }}
+                            {% for error in form.first_name.errors %}
+                            <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                        <div class="input-box" id="signup">
+                            {{ form.last_name.label }}<br>
+                            {{ form.last_name(size=25) }}
+                            {% for error in form.last_name.errors %}
+                            <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="input-box" id="signup">
-                        {{ form.last_name.label }}<br>
-                        {{ form.last_name(size=25) }}
-                        {% for error in form.last_name.errors %}
-                        <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
-                        {% endfor %}
+                    <div class="row">
+                        <div class="input-box" id="signup">
+                            {{ form.email.label }}<br>
+                            {{ form.email(size=65) }}
+                            {% for error in form.email.errors %}
+                            <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                        <div class="input-box" id="signup">
+                            {{ form.username.label }}<br>
+                            {{ form.username(size=65) }}
+                            {% for error in form.username.errors %}
+                            <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="input-box" id="signup">
-                        {{ form.email.label }}<br>
-                        {{ form.email(size=65) }}
-                        {% for error in form.email.errors %}
-                        <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
-                        {% endfor %}
-                    </div>
-                    <div class="input-box" id="signup">
-                        {{ form.username.label }}<br>
-                        {{ form.username(size=65) }}
-                        {% for error in form.username.errors %}
-                        <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
-                        {% endfor %}
-                    </div>
-                    <div class="input-box" id="signup">
-                        {{ form.password.label }}<br>
-                        {{ form.password(size=128) }}
-                        {% for error in form.password.errors %}
-                        <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
-                        {% endfor %}
-                    </div>
-                    <div class="input-box" id="signup">
-                        {{ form.confirm_password.label }}<br>
-                        {{ form.confirm_password(size=128) }}
-                        {% for error in form.confirm_password.errors %}
-                        <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
-                        {% endfor %}
+                    <div class="row">
+                        <div class="input-box" id="signup">
+                            {{ form.password.label }}<br>
+                            {{ form.password(size=128) }}
+                            {% for error in form.password.errors %}
+                            <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                        <div class="input-box" id="signup">
+                            {{ form.confirm_password.label }}<br>
+                            {{ form.confirm_password(size=128) }}
+                            {% for error in form.confirm_password.errors %}
+                            <span style="color: whitesmoke; font-size: 12px;"><br>[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
                     </div>
                     <div class="input-box" id="optional">
                         {{ form.phone_number.label }}<br>
@@ -84,7 +89,7 @@
                 </form>
             </div>
         </div>
-    <a href="{{ url_for('pub_views.landing_page') }}" style="color: white; font-weight: 800;">Home</a>
+    <a href="{{ url_for('pub_views.landing_page') }}" style="color: #FFB84C; font-weight: 800;">Home</a>
     </div>
 </body>
 </html>

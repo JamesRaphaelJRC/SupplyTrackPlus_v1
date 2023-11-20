@@ -1,0 +1,52 @@
+{% extends 'base_landing.html' %}
+{% block content %}
+            <div class="banner">
+                <h1>Keep your vendors and supplies at<br><span id="writeup"> arms reach</span></h1>
+                <div id="circle"></div>
+            </div>
+            <div id="circle-mobile" class="image"></div>
+            <div class="img image"></div>
+        </div>
+    </div>
+    <div class="second-view">
+        <div class="display-container" id="secondview">
+            <h1 class="caption">Manage your vendors<br><span style="color: white;">and orders all in one place</span></h1>
+            <div class="img-collection">
+                <div class="small-frame image" id="first"></div>
+                <div class="small-frame image" id="second"></div>
+                <div class="small-frame image" id="third"></div>
+            </div>
+        </div>
+    </div>
+    <div class="third-view first-view">
+        <div class="display-container" id="third-view">
+            <div class="left-box">
+                <p class="caption">Why register?</p>
+                <p class="small-writeup">Focus your energy on more pressing needs. Lets do the paperworks, storage and statistics</p>
+                <a href="{{ url_for('pub_views.signUp')}}"><div class="acc-btn">Register</div></a>
+            </div>
+            <div class="right-box">
+                <div class="small-box">
+                    <div class="icon image" id="simple"></div>
+                    <p class="small-writeup bold">Simplicity</p>
+                    <p class="small-writeup">Easy to use and does not require special training</p>
+                </div>
+                <div class="small-box">
+                    <div class="icon image" id="flexible"></div>
+                    <p class="small-writeup bold">Flexibility</p>
+                    <p class="small-writeup">Adaptable to any business model</p>
+                </div>
+                <div class="small-box">
+                    <div class="icon image" id="autonomy"></div>
+                    <p class="small-writeup bold">Autonomy</p>
+                    <p class="small-writeup">Designed for just you and your business</p>
+                </div>
+                <div class="small-box">
+                    <div class="icon image" id="privacy"></div>
+                    <p class="small-writeup bold">Privacy</p>
+                    <p class="small-writeup">Your records remains 100% secured with no third party intervention</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

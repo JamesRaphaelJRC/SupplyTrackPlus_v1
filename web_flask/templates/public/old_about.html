@@ -1,19 +1,16 @@
 {% extends 'base_landing.html' %}
 {% block content %}
-<div class="display-container" id="about">
-    <div id="writeup-mobile"><h2>Welcome to SupplyTrackPlus</h2>
-    <p>Explore our platform and streamline your business operations!</p>
-    </div>
+<div class="intro-container" id="about">
     <div class="row-cont">
         <div class="pic" id="intro"></div>
-        <div id="writeup-desktop">
-            <h2>Welcome to SupplyTrackPlus</h2>
-            <p>Explore our platform and streamline your business operations!</p>
+        <div id="writeup"><h2>Welcome to SupplyTrackPlus</h2>Where managing vendors and orders 
+            is simple and efficient.<br>Explore our platform to streamline your business 
+            operations!
         </div>
     </div>
     <div class="row-cont" id="ourstory">
         <div class="pic"></div>
-        <div id="writeup-abt">
+        <div id="writeup">
             <h1>Our Story</h1>
             Our journey began with a single vision: to simplify the way businesses manage vendors
             and orders. It all started in a bustling work environment, fueled by the desire to create a seamless 
@@ -35,9 +32,14 @@
     </div>
     <div class="row-cont" id="team">
         <div class="pic" id="team"></div>
-        <div id="writeup-abt"><h2>Meet Our Team</h2>
+        <div id="writeup"><h2>Meet Our Team</h2>
             <h5>James Raphael (Owner)</h5>
+            <div id="info">
+                <a href="https://github.com/JamesRaphaelJRC/SupplyTrackPlus_v1" target="_blank"><div id="github"></div></a>
+                <a href="https://www.linkedin.com/in/james-raphael-1a65311b3" target="_blank"><div id="linkedin"></div></a>
+            </div>
         </div>
     </div>
+
 </div>
 {% endblock %}

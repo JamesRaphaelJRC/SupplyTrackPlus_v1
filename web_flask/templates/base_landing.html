@@ -2,46 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupplyTrackPlus</title>
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/browser.png') }}">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css')}}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/landing.css')}}">
 </head>
 <body>
-    <div class="upper-container">
-        <header>
-            <div id="logo"></div>
-            <div class="nav">
-                <a href="{{ url_for('pub_views.landing_page')}}">
+    <div class="first-view">
+        <div class="display-container">
+            <div class="header">
+                <div class="nav">
+                    <a href="{{ url_for('pub_views.landing_page')}}"><div id="logo">SupplyTrackPlus&trade;</div></a>
+                    <a href="{{ url_for('pub_views.landing_page')}}">
+                        {% if page == 'Home' %}
+                            <h4 style="color: #FFB84C;">Home</h4>
+                        {% else %}
+                            <h4>Home</h4>
+                        {% endif %}
+                    </a>
+                    <a href="{{ url_for('pub_views.about')}}">
+                        {% if page == 'About' %}
+                            <h4 style="color: #FFB84C;">About</h4>
+                        {% else %}
+                            <h4>About</h4>
+                        {% endif %}
+                    </a>
+                    <h4>Our Vision</h4>
+                </div>
+                <div class="accounts">
+                    {% if page == 'Home' %}
+                    <a href="{{ url_for('pub_views.login')}}"><div class="acc-btn">Sign In</div></a>
+                    {% else %}
+                    <a href="{{ url_for('pub_views.login')}}"><div class="acc-btn" id="abt">Sign In</div></a>
+                    <a href="{{ url_for('pub_views.signUp')}}"><div class="acc-btn" id="abt">Sign Up</div></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% block content %}{% endblock %}
+    <div class="footer">
+        <div class="display-container" id="footer">
+            <div class="logo image"></div>
+            <div class="connect">
+                <h4 class="writeup">Lets connect:</h4>
+                <a href="mailto:jamesraphaeljrc@gmail.com"><div class="footicon image" id="email"></div></a>
+                <a href="https://twitter.com/JamesRa62272775" target="_blank"><div class="footicon image" id="twitter"></div></a>
+                <a href="https://www.linkedin.com/in/james-raphael-1a65311b3" target="_blank"><div class="footicon image" id="linkedin"></div></a>
+                <a href="https://github.com/JamesRaphaelJRC/SupplyTrackPlus_v1" target="_blank"><div class="footicon image" id="github"></div></a>
+            </div>
+            <div class="nav-foot">
+            <a href="{{ url_for('pub_views.landing_page')}}">
                 {% if page == 'Home' %}
-                <div id="home"><span style="color: blue;">Home</span></div>
+                    <h4 style="color: #FFB84C;">Home</h4>
                 {% else %}
-                <div id="home">Home</div>
+                    <h4>Home</h4>
                 {% endif %}
             </a>
-                <a href="{{ url_for('pub_views.about')}}">
+            <a href="{{ url_for('pub_views.about')}}">
                 {% if page == 'About' %}
-                <div id="about"><span style="color: blue;">About Us</span></div>
+                    <h4 style="color: #FFB84C;">About</h4>
                 {% else %}
-                    <div id="about">About Us</div>
+                    <h4>About</h4>
                 {% endif %}
-                </a>
-                <div id="vision">Our Vision</div>
+            </a>
+                <h4>Our Vision</h4>
             </div>
-            <div class="accounts">
-                <!-- <div id="signup">SignUp/</div> -->
-                {% if page != 'Home' %}
-                <a href="{{ url_for('pub_views.login')}}"><div id="signIn">Sign In /</div></a>
-                <a href="{{ url_for('pub_views.signUp')}}"><div id="signIn"> Sign Up</div></a>
-                {% else %}
-                <a href="{{ url_for('pub_views.login')}}"><div id="signIn">Sign In</div></a>
-                {% endif %}
-            </div>
-        </header>
-        {% block content %}{% endblock %}
 
+        </div>
+    </div>
+</body>
 </html>
-

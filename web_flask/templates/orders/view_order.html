@@ -63,7 +63,7 @@
     <p id="tot"><strong>Total Cost:</strong>
       <span id="tot-cost">
         {% if order.unit_cost == None or order.quantity == 0 %}
-          0
+          0.0000
         {% else %}
           {{ order.quantity * order.unit_cost }}
         {% endif %}

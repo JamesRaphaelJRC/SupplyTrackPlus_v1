@@ -1,99 +1,57 @@
-/*
-    ====================
-    General page styling
-    ====================
-*/
-body#accounts {
-    width: 100vw;
-    height: 100vh;
+body {
     margin: 0;
-    position: absolute;
-    background-color: gray;
+    padding: 0;
 }
 
-.background-frame {
-    width: 100%;
-    height: 100%;
-    position: absolute;
+.container {
+    height: 100vh;
     background-image: url('../images/loginpic3edit.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
-    object-fit: cover;
-}
-
-
-/* 
-    =========================================
-    Styling for the left contents of the page
-    =========================================
-*/
-.left-box {
-    height: 300px;
-    width: 400px;
-    left: 200px;
-    top: 2px;
-    position: absolute;
+    background-position: top;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.logo#accounts {
-    height: 50px;
+#logo-signup,
+#logo {
+    height: 100px;
     width: 300px;
-    /* border: 1px solid black; */
-    padding-bottom: 50px;
+    margin-top: -10px;
     background-image: url('../images/Black-logo-nobackground.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.write-up {
-    left: 4px;
-    position: relative;
-    color: black;
-    font-size: 22px;
-    font-family: Emotional Rescue Personal Use;
-    font-weight: 500;
-    font-style: italic;
-    line-height: 48px;
-    word-wrap: break-word;
-}
-
-
-/*
-    ==========================================
-    Styling for the right contents of the page
-    ==========================================
-*/
-
 /* Styling for flash messages */
 .messages {
-    width: 500px;
+    /* border: 1px solid green; */
+    width: 80%;
     height: 40px;
-    float: right;
     color:rgb(238, 20, 38);
     font-family: Cabinet Grotesk;
     font-weight: 800;
     text-align: center;
 }
+
 .login-container {
     /* border: 1px solid black; */
-    width: 380px;
-    height: 452px;
-    background: rgba(128, 128, 128, 0.1);
+    width: 350px;
+    height: 400px;
+    background: rgba(128, 128, 128, 0.85);
     border-radius: 24px;
-    left: 70%;
-    top: 50px;
-    position: absolute;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 p.text {
     /* border: 1px solid red; */
-    left: 80px;
-    top: 10px;
-    position: absolute;
-    font-size: 35px;
+    margin: 0 0 5px 0;
+    font-size: 30px;
     font-family: Cabinet Grotesk;
     font-weight: 800;
     color: black;
@@ -103,6 +61,12 @@ p.text {
     color: white;
 }
 
+p#instr {
+    margin: 0 0 10px 0;
+    color: #FFB84C;
+    text-align: center;
+    font-weight: 600;
+}
 
 /*
     =============
@@ -110,11 +74,9 @@ p.text {
     =============
 */
 .form-container {
-    top: 80px;
-    left: 5px;
-    position: relative;
+    /* border: 1px solid purple; */
+    width: 90%;
 }
-
 .input-box {
     margin-bottom: 15px;
     font-weight: 520;
@@ -123,21 +85,17 @@ p.text {
 }
 
 input[type="text"], input[type="password"] {
-    width: 350px;
+    width: 95%;
     height: 35px;
-    left: 5px;
-    top: 200px;
     border-radius: 9px;
     border: 1px rgb(247, 244, 244) solid;
 }
 
 input[type="submit"] {
-    /* border: 1px solid black; */
     width: 125px;
     height: 48px;
     left: 115px;
     background: rgb(194, 188, 188);
-    position: absolute;
     text-align: center;
     color: black;
     font-size: 14px;
@@ -156,18 +114,12 @@ input[type="submit"]:hover {
     /* border: 1px solid black; */
     width: 225px;
     height: 18px;
-    left: 69.50px;
-    top: 340px;
-    position: absolute;
 }
 
 .line {
     /* border: 1px solid yellow; */
     width: 225px;
     height: 1px;
-    left: 0px;
-    top: 8px;
-    position: absolute;
 }
 
 p {
@@ -175,9 +127,6 @@ p {
 }
 
 #or {
-    left: 101px;
-    top: 0px;
-    position: absolute;
     text-align: center;
     color: black;
     font-size: 14px;
@@ -187,28 +136,98 @@ p {
     word-wrap: break-word;
 }
 
+p#register {
+    margin-top: 20px;
+    width: 209px;
+    height: 9.40px;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    color: #FFB84C;
+    font-weight: 600;
+}
 
 /*
     ================
     Sign up styles
     ================
 */
-.signup-container {
-    width: 400px;
-    height: 100%;
+
+.messages#signup {
+    margin-top: -20px;
+}
+.login-container.signup {
+    /* border: 1px solid blanchedalmond; */
+    width: 60%;
+    height: auto;
     background: gray;
     opacity: 0.9;
     border-radius: 5px;
     left: 69%;
-    position: absolute;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
 }
 
 .input-box#signup {
     font-weight: 500;
     margin-bottom: 0;
     top: 0;
+    width: 50%;
 }
 
 .input-box#optional {
     font-weight: 500;
+    width: 102%;
+}
+
+#signup {
+    margin-bottom: 20px;
+}
+
+/* Media query for screens 600px and below */
+@media (max-width: 600px) {
+    #logo {
+        margin-top: -200px;
+    }
+
+    .messages {
+        /* border: 1px solid rebeccapurple; */
+        margin-top: -100px;
+        margin-bottom: 2%;
+    }
+
+    .login-container.signup {
+        width: 60%;
+        height: auto;
+        background: gray;
+        opacity: 0.9;
+        border-radius: 5px;
+        left: 69%;
+    }
+    
+    .input-box#signup {
+        font-weight: 500;
+        margin-bottom: 0;
+        top: 0;
+        width: 100%;
+    }
+    
+    .input-box#optional {
+        font-weight: 500;
+        width: 100%;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    #instr.ins-signup {
+        margin-top: -100px;
+    }
 }

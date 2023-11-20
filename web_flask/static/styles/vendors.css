@@ -144,7 +144,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: rgb(61, 96, 153, 0.2);
+    background-color: rgba(126, 132, 141, 0.6);
+
 
 }
 @media only screen and (max-width: 600px) {

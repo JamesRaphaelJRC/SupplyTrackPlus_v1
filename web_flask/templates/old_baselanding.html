@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>SupplyTrackPlus</title>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/browser.png') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css')}}">
+
+</head>
+<body>
+    <div class="upper-container">
+        <header>
+            <div id="logo"></div>
+            <div class="nav">
+                <a href="{{ url_for('pub_views.landing_page')}}">
+                {% if page == 'Home' %}
+                <div id="home"><span style="color: blue;">Home</span></div>
+                {% else %}
+                <div id="home">Home</div>
+                {% endif %}
+            </a>
+                <a href="{{ url_for('pub_views.about')}}">
+                {% if page == 'About' %}
+                <div id="about"><span style="color: blue;">About Us</span></div>
+                {% else %}
+                    <div id="about">About Us</div>
+                {% endif %}
+                </a>
+                <div id="vision">Our Vision</div>
+            </div>
+            <div class="accounts">
+                <!-- <div id="signup">SignUp/</div> -->
+                {% if page != 'Home' %}
+                <a href="{{ url_for('pub_views.login')}}"><div id="signIn">Sign In /</div></a>
+                <a href="{{ url_for('pub_views.signUp')}}"><div id="signIn"> Sign Up</div></a>
+                {% else %}
+                <a href="{{ url_for('pub_views.login')}}"><div id="signIn">Sign In</div></a>
+                {% endif %}
+            </div>
+        </header>
+        {% block content %}{% endblock %}
+
+</html>
+

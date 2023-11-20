@@ -6,7 +6,7 @@ body {
     background-image: url('../images/newash.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
-    /* position: absolute; */
+    /* font-size: 15px; */
 }
 
 /* Adjust font sizes for smaller screens using media queries */

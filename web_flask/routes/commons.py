@@ -1,4 +1,5 @@
 ''' Defines logics that apply to all routes '''
+from flask import render_template
 from flask_login import current_user
 from models.forms import SearchForm
 from models import storage
@@ -17,3 +18,7 @@ def base():
         return dict(searchform=searchform, user=user, stats=stats)
     else:
         return dict(searchform=searchform)
+
+@app.route('/test')
+def test():
+    return render_template('landing.html')
