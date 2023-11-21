@@ -16,8 +16,8 @@
 
 .review-box {
     width: 45%; /* Set to 50% for two cards per row */
-    height: auto;
-    /* border: 1px solid black; */
+    max-height: 50%;
+    border: 1px solid black;
     background-color: #213159;
     border-radius: 8px;
     margin: 1%;
@@ -27,13 +27,6 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-}
-
-/* Adjust font sizes for smaller screens using media queries */
-@media only screen and (max-width: 600px) {
-    .review-box {
-        /* font-size: 0.5em; */
-    }
 }
 
 #actions {
@@ -108,7 +101,7 @@
 
 #review-comment {
     /* border: 1px solid purple; */
-    height: 50%;
+    max-height: 50%;
     width: 100%;
     overflow: scroll;
     color: rgb(180, 170, 170);
@@ -116,4 +109,11 @@
 
 .table-container#form {
     border: 0;
+}
+
+/* Adjust font sizes for smaller screens using media queries */
+@media only screen and (max-width: 600px) {
+    .review-box {
+        /* font-size: 0.5em; */
+    }
 }
