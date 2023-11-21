@@ -140,7 +140,7 @@ def create_order():
             flash("Please select a vendor")
 
             # Return the orders.html page with the form bearing previous inputs
-            return render_template('orders.html', form=form)
+            return render_template('/orders/orders.html', form=form)
 
         order = storage.create_order(
             form.product_name.data, form.description.data, form.quantity.data,
